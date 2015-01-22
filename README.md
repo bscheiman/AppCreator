@@ -3,14 +3,14 @@
 This library contains several Xamarin University-backed best practices & time savers:
 
 - MVVM
-- Fody
-- Simple ViewModels w/ PropertyChanged.Fody
+- Simple ViewModels w/ [PropertyChanged.Fody](https://github.com/Fody/PropertyChanged)
 - Several controls
 - JSON libraries
-- Retry policies w/ Polly
-- JSON API client generation w/ ReFit
-- Error handling w/ AsyncErrorHandler.Fody
+- Retry policies w/ [Polly](https://github.com/michael-wolfenden/Polly)
+- JSON API client generation w/ [Refit](https://github.com/paulcbetts/refit)
+- Error handling w/ [AsyncErrorHandler.Fody](https://github.com/Fody/AsyncErrorHandler)
 
+You'd usually use this library after using [my tools](http://tools.bscheiman.org), but you can just drop it into a Xamarin.Forms project.
 
 # Base page
 
