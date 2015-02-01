@@ -1,9 +1,4 @@
-﻿#region
-using Newtonsoft.Json;
-
-#endregion
-
-namespace AppCreator.Extensions {
+﻿namespace AppCreator.Extensions {
     public static class ObjectExtensions {
         public static string ToJson(this object obj) {
             return JsonConvert.SerializeObject(obj);

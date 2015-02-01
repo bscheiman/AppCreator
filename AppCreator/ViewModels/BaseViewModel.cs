@@ -1,9 +1,6 @@
 ﻿#region
 using System.Threading.Tasks;
 using AppCreator.Custom;
-using PropertyChanged;
-using PropertyChanging;
-using Xamarin.Forms;
 
 #endregion
 
