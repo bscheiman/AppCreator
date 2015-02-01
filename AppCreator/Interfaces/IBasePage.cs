@@ -1,5 +1,4 @@
 ﻿namespace AppCreator.Interfaces {
-	public interface IBasePage {
-	}
+    public interface IBasePage {
+    }
 }
-
