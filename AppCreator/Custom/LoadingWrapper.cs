@@ -1,6 +1,7 @@
 ﻿#region
 using System;
 using AppCreator.ViewModels;
+using Xamarin.Forms;
 
 #endregion
 

@@ -1,6 +1,8 @@
 #region
 using System;
 using System.Threading.Tasks;
+using System.Net.Http;
+using ModernHttpClient;
 
 #endregion
 

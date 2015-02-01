@@ -1,6 +1,9 @@
-﻿namespace AppCreator.Controls {
+﻿using PropertyChanged;
+using Xamarin.Forms;
+
+namespace AppCreator.Controls {
     [ImplementPropertyChanged]
-    public class Spacer : Frame {
+    public partial class Spacer : Frame {
         public int Space { get; set; }
 
         public Spacer() {
