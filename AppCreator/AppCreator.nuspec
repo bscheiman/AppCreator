@@ -1,32 +1,30 @@
 <?xml version="1.0"?>
- <package>
-   <metadata>
-     <id>AppCreator</id>
-     <version>$version$</version>
-     <authors>Boris Scheiman</authors>
-     <projectUrl>https://github.com/bscheiman/AppCreator</projectUrl>
-     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-     <description>Open-source base project for my Xamarin.Forms based AppCreator</description>
-     <language>en-US</language>
-     <tags>boris scheiman bscheiman common xamarin appcreator forms xamarinforms</tags>
-   </metadata>
-   
-   <files>
-	   <file src="bin\Release\AppCreator.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+wp8\AppCreator.dll" />
-	   <file src="bin\Release\AppCreator.dll" target="lib\portable-net45+win+wpa81+wp80\AppCreator.dll" />
-   </files>
-   
-   <dependencies>
-     <dependency id="Acr.XamForms.UserDialogs" />
-     <dependency id="AsyncErrorHandler.Fody" />
-     <dependency id="Fody" />
-     <dependency id="Microsoft.Net.Http" />
-     <dependency id="modernhttpclient" />
-     <dependency id="Newtonsoft.Json" />
-     <dependency id="PropertyChanged.Fody" />
-     <dependency id="PropertyChanging.Fody" />
-     <dependency id="SQLite.Net.Async-PCL" />
-     <dependency id="SQLite.Net-PCL" />
-     <dependency id="ToString.Fody" />
-   </dependencies>
+<package>
+    <metadata>
+        <id>AppCreator</id>
+        <version>$version$</version>
+        <authors>Boris Scheiman</authors>
+        <projectUrl>https://github.com/bscheiman/AppCreator</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Open-source base project for my Xamarin.Forms based AppCreator</description>
+        <language>en-US</language>
+        <tags>boris scheiman bscheiman common xamarin appcreator forms xamarinforms</tags>
+        <dependencies>
+            <dependency id="Acr.XamForms.UserDialogs" />
+            <dependency id="AsyncErrorHandler.Fody" />
+            <dependency id="Fody" />
+            <dependency id="Microsoft.Net.Http" />
+            <dependency id="modernhttpclient" />
+            <dependency id="Newtonsoft.Json" />
+            <dependency id="PropertyChanged.Fody" />
+            <dependency id="PropertyChanging.Fody" />
+            <dependency id="SQLite.Net.Async-PCL" />
+            <dependency id="SQLite.Net-PCL" />
+            <dependency id="ToString.Fody" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\AppCreator.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+wp8\AppCreator.dll" />
+        <file src="bin\Release\AppCreator.dll" target="lib\portable-net45+win+wpa81+wp80\AppCreator.dll" />
+    </files>
 </package>
