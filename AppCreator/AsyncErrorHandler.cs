@@ -1,11 +1,10 @@
-﻿#region
-using System;
-
-#endregion
+﻿using System;
 
 namespace AppCreator {
-    public static class AsyncErrorHandler {
-        public static void HandleException(Exception exception) {
-        }
-    }
+	public static class AsyncErrorHandler {
+		public static void HandleException(Exception exception) {
+
+		}
+	}
 }
+

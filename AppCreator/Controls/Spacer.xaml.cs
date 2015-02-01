@@ -1,17 +1,21 @@
-﻿namespace AppCreator.Controls {
-    [ImplementPropertyChanged]
-    public class Spacer : Frame {
-        public int Space { get; set; }
+﻿using Xamarin.Forms;
+using PropertyChanged;
 
-        public Spacer() {
-            InitializeComponent();
+namespace AppCreator.Controls {
+	[ImplementPropertyChanged]
+	public partial class Spacer : Frame {
+		public int Space { get; set; }
 
-            Space = 10;
-        }
+		public Spacer() {
+			InitializeComponent();
 
-        public void OnSpaceChanged() {
-            Padding = new Thickness(0, 0, 0, Space);
-            BackgroundColor = Color.Transparent;
-        }
-    }
+			Space = 10;
+		}
+
+		public void OnSpaceChanged() {
+			Padding = new Thickness(0, 0, 0, Space);
+			BackgroundColor = Color.Transparent;
+		}
+	}
 }
+

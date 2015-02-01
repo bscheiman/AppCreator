@@ -1,4 +1,5 @@
 ﻿namespace AppCreator.Objects {
-    public class BaseObject {
-    }
+	public class BaseObject {
+	}
 }
+
