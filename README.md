@@ -46,3 +46,14 @@ namespace App.Pages {
 	}
 }
 ```
+
+# Setup
+
+Once created, your app needs to add the AppCreator package via NuGet. This will add a crapload of references to the main PCL project.
+
+
+# Post setup
+
+- Add `Acr.XamForms.UserDialogs` package to iOS/Android
+- Add `[assembly: Dependency(typeof(UserDialogService))]` to `AppDelegate.cs` and `MainActivity.cs`
+- 
