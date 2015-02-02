@@ -36,9 +36,6 @@ namespace AppCreator.Pages {
 		}
 
 		async Task PostInit() {
-			//ConfigureUI();
-			HookEvents();
-
 			await BackingModel.Update();
 
 			PostUpdate();
@@ -74,17 +71,6 @@ namespace AppCreator.Pages {
 
 		protected ScrollView ScrollWrap(View view, int padding = 0, ScrollOrientation orientation = ScrollOrientation.Vertical) {
 			return new ScrollView { Content = view, Padding = padding, Orientation = orientation };
-		}
-
-		protected Frame GetSpacing(int space) {
-			return new Frame {
-				Padding = new Thickness(0, 0, 0, space),
-				BackgroundColor = Color.Transparent
-			};
-		}
-
-		//protected abstract void ConfigureUI();
-		protected virtual void HookEvents() {
 		}
 
 		protected virtual void PostUpdate() {
