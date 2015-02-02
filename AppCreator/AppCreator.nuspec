@@ -13,6 +13,7 @@
             <dependency id="Acr.XamForms.UserDialogs" />
             <dependency id="AsyncErrorHandler.Fody" />
             <dependency id="Fody" />
+            <dependency id="Microsoft.Net.Http" />
             <dependency id="modernhttpclient" />
             <dependency id="Newtonsoft.Json" />
             <dependency id="PropertyChanged.Fody" />
