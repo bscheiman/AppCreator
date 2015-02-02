@@ -56,4 +56,3 @@ Once created, your app needs to add the AppCreator package via NuGet. This will 
 
 - Add `Acr.XamForms.UserDialogs` package to iOS/Android
 - Add `[assembly: Dependency(typeof(UserDialogService))]` to `AppDelegate.cs` and `MainActivity.cs`
-- 
