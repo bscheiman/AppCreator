@@ -21,6 +21,8 @@
             <dependency id="SQLite.Net.Async-PCL" />
             <dependency id="SQLite.Net-PCL" />
             <dependency id="ToString.Fody" />
+            <dependency id="Polly" />
+            <dependency id="Refit" />
         </dependencies>
     </metadata>
     <files>
