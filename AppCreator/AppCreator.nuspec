@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>AppCreator</id>
-        <version>$version$</version>
+        <version>1.0.0</version>
         <authors>Boris Scheiman</authors>
         <projectUrl>https://github.com/bscheiman/AppCreator</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
