@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\Xamarin.iOS10</OutputPath>
+    <OutputPath>..\bin\iOS\Debug\</OutputPath>
     <IntermediateOutputPath>obj\Debug\Xamarin.iOS10</IntermediateOutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -30,7 +30,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\Xamarin.iOS10</OutputPath>
+    <OutputPath>..\bin\iOS\Release\</OutputPath>
     <IntermediateOutputPath>obj\Release\Xamarin.iOS10</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
