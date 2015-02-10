@@ -1,3 +1,4 @@
+@echo off
 del *.nupkg
 .nuget\NuGet.exe pack AppCreator.nuspec
 .nuget\NuGet.exe pack AppCreator.UI.nuspec
