@@ -13,11 +13,12 @@ namespace AppCreator.UI.Controls {
             InitializeComponent();
 
             Space = 10;
+            HasShadow = false;
+            BackgroundColor = Color.Transparent;
         }
 
         public void OnSpaceChanged() {
             Padding = new Thickness(0, 0, 0, Space);
-            BackgroundColor = Color.Transparent;
         }
     }
 }
