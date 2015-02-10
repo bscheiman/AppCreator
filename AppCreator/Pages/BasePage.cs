@@ -77,7 +77,7 @@ namespace AppCreator.Pages {
             return navBar != null;
         }
 
-        private async Task PostInit() {
+        private async void PostInit() {
             await BackingModel.Update();
 
             PostUpdate();

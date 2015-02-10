@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 #endregion
 
-namespace AppCreator.Controls {
+namespace AppCreator.UI.Controls {
     public class BindablePicker<T> : Picker {
         public IEnumerable<T> ItemsSource {
             get { return (IEnumerable<T>) GetValue(ItemsSourceProperty); }

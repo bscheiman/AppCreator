@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 #endregion
 
-namespace AppCreator.Controls {
+namespace AppCreator.UI.Controls {
     [ImplementPropertyChanged]
     public partial class Spacer : Frame {
         public int Space { get; set; }

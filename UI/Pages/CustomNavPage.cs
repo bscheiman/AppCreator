@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 #endregion
 
-namespace AppCreator.Pages {
+namespace AppCreator.UI.Pages {
     public class CustomNavPage : NavigationPage {
         public CustomNavPage(Page p) : base(p) {
             if (string.IsNullOrEmpty(Title))
