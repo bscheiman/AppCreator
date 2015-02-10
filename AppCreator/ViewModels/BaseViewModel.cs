@@ -17,6 +17,7 @@ namespace AppCreator.ViewModels {
         public string Title { get; set; }
 
         public virtual async Task Update() {
+            await Task.Run(() => { });
         }
 
         protected Task Alert(string title = "App", string message = "", string okButton = "Ok") {

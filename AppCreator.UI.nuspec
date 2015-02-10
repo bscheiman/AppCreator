@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AppCreator.UI</id>
-        <version>1.2</version>
+        <version>$version$</version>
         <authors>Boris Scheiman</authors>
         <projectUrl>https://github.com/bscheiman/AppCreator</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
