@@ -24,7 +24,7 @@ This is what a normal AppCreator XAML page looks like:
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:acp="clr-namespace:AppCreator.Pages;assembly=AppCreator"
-	xmlns:acc="clr-namespace:AppCreator.Controls;assembly=AppCreator"
+	xmlns:acc="clr-namespace:AppCreator.UI.Controls;assembly=AppCreator.UI"
 	xmlns:acvm="clr-namespace:AppCreator.ViewModels;assembly=AppCreator"
 	x:Class="App.Pages.DemoPage">
 	<ScrollView>
@@ -49,11 +49,11 @@ namespace App.Pages {
 
 # Setup
 
-Once created, your app needs to add the AppCreator package via NuGet. This will add a crapload of references to the main PCL project.
+Once created, your app needs to add the `AppCreator` and `AppCreator.UI` packages via NuGet. This will add a crapload of references to the main PCL project.
 
 
 # Post setup
 
-- Add `Acr.XamForms.UserDialogs` package to iOS/Android
+- Add `AppCreator.UI` package to iOS/Android
 - Add `[assembly: Dependency(typeof(UserDialogService))]` to `AppDelegate.cs` and `MainActivity.cs`
 - Add reference to `System.Net.Http` (not NuGet, just the native reference)
