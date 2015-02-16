@@ -32,7 +32,7 @@ namespace AppCreator.UI.Controls {
 
         public new event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        internal void RaisePropertyChanged(string propName) {
+        public void RaisePropertyChanged(string propName) {
             PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
@@ -71,6 +71,8 @@ namespace AppCreator.UI.Controls {
                 SelectedItem = default(T);
             else
                 SelectedItem = ItemsSource.ElementAt(SelectedIndex);
+
+            RaisePropertyChanged("SelectedIndex");
         }
 
         private static void OnSelectedItemPropertyChanged(BindableObject bindable, object value, object newValue) {
