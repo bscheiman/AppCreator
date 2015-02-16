@@ -4,11 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using PropertyChanged;
 using Xamarin.Forms;
 
 #endregion
 
 namespace AppCreator.UI.Controls {
+    [ImplementPropertyChanged]
     public class BindablePicker<T> : Picker {
         public IEnumerable<T> ItemsSource {
             get { return (IEnumerable<T>) GetValue(ItemsSourceProperty); }

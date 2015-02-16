@@ -6,12 +6,10 @@ using Xamarin.Forms;
 
 namespace AppCreator.UI.Controls {
     [ImplementPropertyChanged]
-    public partial class Spacer : Frame {
+    public class Spacer : Frame {
         public int Space { get; set; }
 
         public Spacer() {
-            InitializeComponent();
-
             Space = 10;
             HasShadow = false;
             BackgroundColor = Color.Transparent;
