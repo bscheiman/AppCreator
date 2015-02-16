@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using PropertyChanged;
 using Xamarin.Forms;
@@ -10,26 +11,14 @@ using Xamarin.Forms;
 #endregion
 
 namespace AppCreator.UI.Controls {
+    public class BindablePicker : BindablePicker<object> {
+    }
+
     [ImplementPropertyChanged]
-    public class BindablePicker<T> : Picker {
+    public class BindablePicker<T> : Picker where T : class {
         public IEnumerable<T> ItemsSource {
             get { return (IEnumerable<T>) GetValue(ItemsSourceProperty); }
-            set {
-                var notifyChanged = value as INotifyCollectionChanged;
-
-                if (notifyChanged != null) {
-                    var obj = notifyChanged;
-
-                    obj.CollectionChanged += (sender, e) => {
-                        Items.Clear();
-
-                        foreach (var i in (value as ICollection))
-                            Items.Add(i.ToString());
-                    };
-                }
-
-                SetValue(ItemsSourceProperty, value);
-            }
+            set { SetValue(ItemsSourceProperty, value); }
         }
 
         public T SelectedItem {
@@ -41,34 +30,76 @@ namespace AppCreator.UI.Controls {
             SelectedIndexChanged += OnSelectedIndexChanged;
         }
 
-        private static void OnItemsSourceChanged(BindableObject bindable, IEnumerable oldvalue, IEnumerable newvalue) {
-            var picker = bindable as BindablePicker<T>;
-            picker.Items.Clear();
+        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-            if (newvalue != null) {
-                foreach (var item in newvalue)
-                    picker.Items.Add(item.ToString());
-            }
+        internal void RaisePropertyChanged(string propName) {
+            PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-        private void OnSelectedIndexChanged(object sender, EventArgs eventArgs) {
-            if (SelectedIndex < 0 || SelectedIndex > Items.Count - 1)
+        private static void OnItemsSourcePropertyChanged(BindableObject bindable, IEnumerable value, IEnumerable newValue) {
+            var picker = (BindablePicker<T>) bindable;
+            var notifyCollection = newValue as INotifyCollectionChanged;
+
+            if (notifyCollection != null) {
+                notifyCollection.CollectionChanged += (sender, args) => {
+                    if (args.NewItems != null) {
+                        foreach (var newItem in args.NewItems)
+                            picker.Items.Add((newItem ?? "").ToString());
+                    }
+
+                    if (args.OldItems == null)
+                        return;
+
+                    foreach (var oldItem in args.OldItems)
+                        picker.Items.Remove((oldItem ?? "").ToString());
+                };
+            }
+
+            if (newValue == null)
+                return;
+
+            picker.Items.Clear();
+
+            foreach (var item in newValue)
+                picker.Items.Add((item ?? "").ToString());
+
+            picker.RaisePropertyChanged("ItemsSource");
+        }
+
+        private void OnSelectedIndexChanged(object sender, EventArgs e) {
+            if (SelectedIndex < 0 || SelectedIndex >= ItemsSource.Count())
                 SelectedItem = default(T);
             else
                 SelectedItem = ItemsSource.ElementAt(SelectedIndex);
         }
 
-        private static void OnSelectedItemChanged(BindableObject bindable, object oldvalue, object newvalue) {
-            var picker = bindable as BindablePicker<T>;
+        private static void OnSelectedItemPropertyChanged(BindableObject bindable, object value, object newValue) {
+            var picker = (BindablePicker<T>) bindable;
 
-            if (newvalue != null)
-                picker.SelectedIndex = picker.Items.IndexOf(newvalue.ToString());
+            if (picker.ItemsSource == null)
+                return;
+
+            int index = 0;
+
+            foreach (var item in picker.ItemsSource) {
+                if (picker.SelectedItem == item) {
+                    picker.SelectedIndex = index;
+
+                    break;
+                }
+
+                index++;
+            }
+
+            picker.RaisePropertyChanged("SelectedItem");
         }
 
-        public static BindableProperty ItemsSourceProperty = BindableProperty.Create<BindablePicker<T>, IEnumerable>(o => o.ItemsSource,
-            default(IEnumerable), propertyChanged: OnItemsSourceChanged);
+        public static readonly BindableProperty ItemsSourceProperty =
+            BindableProperty.Create<BindablePicker<T>, IEnumerable<T>>(p => p.ItemsSource, null,
+                propertyChanged: OnItemsSourcePropertyChanged);
 
-        public static BindableProperty SelectedItemProperty = BindableProperty.Create<BindablePicker<T>, object>(o => o.SelectedItem,
-            default(object), propertyChanged: OnSelectedItemChanged);
+        public static readonly BindableProperty SelectedItemProperty =
+            BindableProperty.Create<BindablePicker<T>, object>(p => p.SelectedItem, null, BindingMode.TwoWay,
+                propertyChanged: OnSelectedItemPropertyChanged);
     }
 }
