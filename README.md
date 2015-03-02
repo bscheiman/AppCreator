@@ -27,7 +27,7 @@ This is what a normal AppCreator XAML page looks like:
 	xmlns:acc="clr-namespace:AppCreator.UI.Controls;assembly=AppCreator.UI"
 	xmlns:acvm="clr-namespace:AppCreator.ViewModels;assembly=AppCreator"
 	xmlns:e="clr-namespace:AppCreator.Behaviors;assembly=AppCreator"
-	xmlns:v="clr-namespace:Bitbuddy.ViewModels;assembly=Bitbuddy"
+	xmlns:v="clr-namespace:XXX.ViewModels;assembly=XXX"
 	x:Class="App.Pages.DemoPage">
 	<ScrollView>
 		<StackLayout
