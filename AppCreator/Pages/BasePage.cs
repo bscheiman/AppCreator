@@ -1,7 +1,6 @@
 ﻿#region
 using System;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using AppCreator.Interfaces;
 using AppCreator.ViewModels;
 using Xamarin.Forms;
@@ -28,7 +27,9 @@ namespace AppCreator.Pages {
             Bind(TitleProperty, m => m.Title);
             Bind(IconProperty, m => m.Icon);
 
-            PostInit();
+            // iOS 7 Status bar
+            Padding = new Thickness(0, Device.OnPlatform(HasNavigationBar() ? 0 : 20, 0, 0), 0, 0);
+
         }
 
         protected string _<TV>(Expression<Func<TModel, TV>> func) {
@@ -52,8 +53,7 @@ namespace AppCreator.Pages {
         protected override void OnAppearing() {
             base.OnAppearing();
 
-            // iOS 7 Status bar
-            Padding = new Thickness(0, Device.OnPlatform(HasNavigationBar() ? 0 : 20, 0, 0), 0, 0);
+            PostInit();
         }
 
         protected virtual void PostUpdate() {
@@ -72,9 +72,7 @@ namespace AppCreator.Pages {
         }
 
         private bool HasNavigationBar() {
-            var navBar = Parent as NavigationPage;
-
-            return navBar != null;
+            return Parent is NavigationPage;
         }
 
         private async void PostInit() {
