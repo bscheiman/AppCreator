@@ -1,6 +1,7 @@
 ﻿#region
+using System;
 using System.Threading.Tasks;
-using Acr.XamForms.UserDialogs;
+using Acr.UserDialogs;
 using AppCreator.Custom;
 using PropertyChanged;
 using Xamarin.Forms;
@@ -10,14 +11,16 @@ using Xamarin.Forms;
 namespace AppCreator.ViewModels {
     [ImplementPropertyChanged]
     public class BaseViewModel {
+        public bool CallUpdateOnAppear { get; set; }
         public string Icon { get; set; }
         public bool IsBusy { get; set; }
         public INavigation Navigation { get; set; }
         public ContentPage Page { get; set; }
         public string Title { get; set; }
+        public bool Updated { get; set; }
 
-        public virtual async Task Update() {
-            await Task.Run(() => { });
+        public BaseViewModel() {
+            CallUpdateOnAppear = true;
         }
 
         protected Task Alert(string title = "App", string message = "", string okButton = "Ok") {
@@ -55,6 +58,14 @@ namespace AppCreator.ViewModels {
 
         protected Task<PromptResult> Prompt(PromptConfig cfg) {
             return Instances.Dialogs.PromptAsync(cfg);
+        }
+
+        protected void Toast(string message, int timeoutSeconds = 3, Action act = null) {
+            Instances.Dialogs.Toast(message, timeoutSeconds, act);
+        }
+
+        public virtual async Task Update() {
+            await Task.Run(() => { });
         }
     }
 

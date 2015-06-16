@@ -8,7 +8,7 @@ namespace AppCreator.Behaviors {
     public class NumericValidationBehavior : BaseValidatorBehavior {
         protected override void OnEntryTextChanged(object sender, TextChangedEventArgs args) {
             double result;
-            bool isValid = Double.TryParse(args.NewTextValue, out result);
+            var isValid = Double.TryParse(args.NewTextValue, out result);
 
             ((Entry) sender).TextColor = isValid ? ValidColor : InvalidColor;
         }

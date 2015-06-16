@@ -28,57 +28,25 @@ namespace AppCreator.Pages {
             Bind(IconProperty, m => m.Icon);
 
             // iOS 7 Status bar
-            Padding = new Thickness(0, Device.OnPlatform(HasNavigationBar() ? 0 : 20, 0, 0), 0, 0);
-
-        }
-
-        protected string _<TV>(Expression<Func<TModel, TV>> func) {
-            return (func.Body as MemberExpression).Member.Name;
+            Padding = new Thickness(0, 0, 0, 0);
         }
 
         protected void Bind<TV>(BindableProperty property, Expression<Func<TModel, TV>> func) {
             SetBinding(property, new Binding((func.Body as MemberExpression).Member.Name));
         }
 
-        protected void Bind<TV>(BindableProperty property, Expression<Func<TV>> func) {
-            SetBinding(property, new Binding((func.Body as MemberExpression).Member.Name));
-        }
-
-        protected TView Bind<TView, TV>(TView element, BindableProperty property, Expression<Func<TModel, TV>> func) where TView : Element {
-            element.SetBinding(property, new Binding((func.Body as MemberExpression).Member.Name));
-
-            return element;
-        }
-
-        protected override void OnAppearing() {
+        protected override async void OnAppearing() {
             base.OnAppearing();
 
-            PostInit();
-        }
+            if (BackingModel.Updated && !BackingModel.CallUpdateOnAppear)
+                return;
 
-        protected virtual void PostUpdate() {
+            await BackingModel.Update();
+            BackingModel.Updated = true;
         }
 
         protected void ResetPadding() {
             Padding = new Thickness(0, 0, 0, 0);
-        }
-
-        protected ScrollView ScrollWrap(View view, int padding = 0, ScrollOrientation orientation = ScrollOrientation.Vertical) {
-            return new ScrollView {
-                Content = view,
-                Padding = padding,
-                Orientation = orientation
-            };
-        }
-
-        private bool HasNavigationBar() {
-            return Parent is NavigationPage;
-        }
-
-        private async void PostInit() {
-            await BackingModel.Update();
-
-            PostUpdate();
         }
     }
 }

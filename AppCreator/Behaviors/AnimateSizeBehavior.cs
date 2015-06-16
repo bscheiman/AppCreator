@@ -16,18 +16,6 @@ namespace AppCreator.Behaviors {
             Scale = 1.02;
         }
 
-        protected override void OnAttachedTo(View bindable) {
-            bindable.Focused += OnFocused;
-
-            base.OnAttachedTo(bindable);
-        }
-
-        protected override void OnDetachingFrom(View bindable) {
-            bindable.Focused -= OnFocused;
-
-            base.OnDetachingFrom(bindable);
-        }
-
         private static Easing GetEasing(string easingName) {
             switch (easingName) {
                 case "BounceIn":
@@ -63,6 +51,18 @@ namespace AppCreator.Behaviors {
                 default:
                     throw new ArgumentException(string.Format("{0} is not valid", easingName));
             }
+        }
+
+        protected override void OnAttachedTo(View bindable) {
+            bindable.Focused += OnFocused;
+
+            base.OnAttachedTo(bindable);
+        }
+
+        protected override void OnDetachingFrom(View bindable) {
+            bindable.Focused -= OnFocused;
+
+            base.OnDetachingFrom(bindable);
         }
 
         private async void OnFocused(object sender, FocusEventArgs e) {

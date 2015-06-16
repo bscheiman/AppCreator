@@ -1,8 +1,4 @@
-﻿#region
-
-#endregion
-
-namespace AppCreator.Behaviors {
+﻿namespace AppCreator.Behaviors {
     public class EmailValidatorBehavior : RegexValidatorBehavior {
         public EmailValidatorBehavior() {
             RegEx = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +

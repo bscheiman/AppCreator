@@ -16,6 +16,12 @@ namespace AppCreator.UI.Controls {
 
     [ImplementPropertyChanged]
     public class BindablePicker<T> : Picker where T : class {
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create<BindablePicker<T>, IEnumerable<T>>(p => p.ItemsSource,
+            null, propertyChanged: OnItemsSourcePropertyChanged);
+
+        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create<BindablePicker<T>, object>(p => p.SelectedItem, null,
+            BindingMode.TwoWay, propertyChanged: OnSelectedItemPropertyChanged);
+
         public IEnumerable<T> ItemsSource {
             get { return (IEnumerable<T>) GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
@@ -28,12 +34,6 @@ namespace AppCreator.UI.Controls {
 
         public BindablePicker() {
             SelectedIndexChanged += OnSelectedIndexChanged;
-        }
-
-        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        public void RaisePropertyChanged(string propName) {
-            PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
         private static void OnItemsSourcePropertyChanged(BindableObject bindable, IEnumerable value, IEnumerable newValue) {
@@ -81,7 +81,7 @@ namespace AppCreator.UI.Controls {
             if (picker.ItemsSource == null)
                 return;
 
-            int index = 0;
+            var index = 0;
 
             foreach (var item in picker.ItemsSource) {
                 if (picker.SelectedItem == item) {
@@ -96,12 +96,10 @@ namespace AppCreator.UI.Controls {
             picker.RaisePropertyChanged("SelectedItem");
         }
 
-        public static readonly BindableProperty ItemsSourceProperty =
-            BindableProperty.Create<BindablePicker<T>, IEnumerable<T>>(p => p.ItemsSource, null,
-                propertyChanged: OnItemsSourcePropertyChanged);
+        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        public static readonly BindableProperty SelectedItemProperty =
-            BindableProperty.Create<BindablePicker<T>, object>(p => p.SelectedItem, null, BindingMode.TwoWay,
-                propertyChanged: OnSelectedItemPropertyChanged);
+        public void RaisePropertyChanged(string propName) {
+            PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
     }
 }

@@ -8,9 +8,9 @@ namespace AppCreator.UI.Controls {
     [ImplementPropertyChanged]
     public class EntryIcon : StackLayout {
         internal Entry Entry { get; set; }
+        public string Icon { get; set; }
         internal Image Image { get; set; }
         public string Placeholder { get; set; }
-        public string Icon { get; set; }
         public string Text { get; set; }
         public Color TextColor { get; set; }
 
