@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>AppCreator.UI</id>
+        <version>$version$</version>
+        <authors>Boris Scheiman</authors>
+        <projectUrl>https://github.com/bscheiman/AppCreator</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Open-source base project for my Xamarin.Forms based AppCreator</description>
+        <language>en-US</language>
+        <tags>boris scheiman bscheiman common xamarin appcreator appcreator.ui forms xamarinforms</tags>
+        <dependencies>
+            <group>
+                <dependency id="Xamarin.Forms" version="1.4.4.6387" />
+                <dependency id="AppCreator" version="$version$" />
+            </group>
+            <group targetFramework="MonoAndroid10">
+                <dependency id="Xamarin.Forms" version="1.4.4.6387" />
+                <dependency id="AppCreator" version="$version$" />
+            </group>
+            <group targetFramework="Xamarin.iOS10">
+                <dependency id="Xamarin.Forms" version="1.4.4.6387" />
+                <dependency id="AppCreator" version="$version$" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+      <!-- PCL -->
+      <file src="AppCreator.UI/bin/Release/AppCreator*" target="lib/portable-net45+wp8+win8" />
+
+      <!-- Xamarin.iOS -->
+      <file src="AppCreator.iOS/bin/iPhone/Release/AppCreator*" target="lib/xamarinios10" />
+      <file src="AppCreator.iOS/Content/Implementations/Notes.txt" target="content/xamarinios10/Implementations" />
+      <file src="AppCreator.iOS/Content/Renderers/Notes.txt" target="content/xamarinios10/Renderers" />
+      <file src="AppCreator.iOS/Content/Initializers/Init.cs" target="content/xamarinios10/Initializers" />
+
+      <!-- Xamarin.Android -->
+      <file src="AppCreator.Droid/bin/Release/AppCreator*" target="lib/MonoAndroid10" />
+      <file src="AppCreator.Droid/Content/Implementations/Notes.txt" target="content/MonoAndroid10/Implementations" />
+      <file src="AppCreator.Droid/Content/Renderers/Notes.txt" target="content/MonoAndroid10/Renderers" />
+      <file src="AppCreator.Droid/Content/Initializers/Init.cs" target="content/MonoAndroid10/Initializers" />
+    </files>
+</package>
