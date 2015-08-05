@@ -11,15 +11,15 @@
         <tags>boris scheiman bscheiman common xamarin appcreator appcreator.ui forms xamarinforms</tags>
         <dependencies>
             <group>
-                <dependency id="Xamarin.Forms" version="1.4.4.6387" />
+                <dependency id="Xamarin.Forms" version="1.4.4.6392" />
                 <dependency id="AppCreator" version="$version$" />
             </group>
             <group targetFramework="MonoAndroid10">
-                <dependency id="Xamarin.Forms" version="1.4.4.6387" />
+                <dependency id="Xamarin.Forms" version="1.4.4.6392" />
                 <dependency id="AppCreator" version="$version$" />
             </group>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="Xamarin.Forms" version="1.4.4.6387" />
+                <dependency id="Xamarin.Forms" version="1.4.4.6392" />
                 <dependency id="AppCreator" version="$version$" />
             </group>
         </dependencies>
