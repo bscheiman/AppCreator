@@ -60,6 +60,7 @@
     <Compile Include="RefitStubs.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="Json\BaseJsonClient.cs" />
+    <Compile Include="Custom\FALabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml">
