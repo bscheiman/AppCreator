@@ -55,7 +55,7 @@ namespace AppCreator {
 
 		private FormUrlEncodedContent ObjectToFormContent(object obj) {
 			if (obj == null)
-				return new List<KeyValuePair<string, string>>();
+				return new FormUrlEncodedContent(new List<KeyValuePair<string, string>>());
 
 			var type = obj.GetType();
 			var properties = type.GetRuntimeProperties();
@@ -64,17 +64,14 @@ namespace AppCreator {
 			                                                                                         p.GetValue(obj).ToString())).ToList());
 		}
 
-		private Uri FormatAddressWithObject(string url, object obj) {
+		private string FormatAddressWithObject(string url, object obj) {
 			if (obj == null)
 				return url;
 
 			var type = obj.GetType();
 			var properties = type.GetRuntimeProperties();
 
-			foreach (var p in properties)
-				url = url.Replace(string.Format("{{{0}}}", p.Name), p.GetValue(obj).ToString());
-
-			return url;
+			return properties.Aggregate(url, (current, p) => current.Replace(string.Format("{{{0}}}", p.Name), p.GetValue(obj).ToString()));
 		}
 
 		private Uri GetUrl(string url, string query = "") {
