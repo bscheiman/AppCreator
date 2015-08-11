@@ -127,6 +127,9 @@
     <Reference Include="Refit">
       <HintPath>..\packages\refit.2.3.0\lib\Portable-Net45+WinRT45+WP8+WPA81\Refit.dll</HintPath>
     </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Portable-Net45+WinRT45+WP8+WPA81\ModernHttpClient.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Json\" />
