@@ -25,7 +25,7 @@ namespace AppCreator {
 			}
 		}
 
-		protected async Task<T> Post<T>(string url, Dictionary<string, string> keyValues = null) {
+		protected async Task<T> PostFormDataContent<T>(string url, Dictionary<string, string> keyValues = null) {
 			keyValues = keyValues ?? new Dictionary<string, string>();
 
 			using (var httpClient = new HttpClient(new NativeMessageHandler())) {
@@ -35,6 +35,15 @@ namespace AppCreator {
 					content.Add(new StringContent(k.Value), k.Key);
 
 				var res = await httpClient.PostAsync(GetUrl(url), content);
+				var msg = await res.Content.ReadAsStringAsync();
+
+				return msg.FromJson<T>();
+			}
+		}
+
+		protected async Task<T> PostJson<T>(string url, object obj) {
+			using (var httpClient = new HttpClient(new NativeMessageHandler())) {
+				var res = await httpClient.PostAsync(GetUrl(url), new StringContent(obj.ToJson(), Encoding.UTF8, "application/json"));
 				var msg = await res.Content.ReadAsStringAsync();
 
 				return msg.FromJson<T>();
@@ -74,13 +83,13 @@ namespace AppCreator {
 			return properties.Aggregate(url, (current, p) => current.Replace(string.Format("{{{0}}}", p.Name), p.GetValue(obj).ToString()));
 		}
 
-		private Uri GetUrl(string url, string query = "") {
+		private Uri GetUrl(string url, object obj = null, string query = "") {
 			var isAbsolute = url.StartsWith("http");
 
 			if (isAbsolute)
-				return new Uri(string.Format("{0}{1}{2}", url, string.IsNullOrEmpty(query) ? "" : "?", query));
+				return new Uri(string.Format("{0}{1}{2}", FormatAddressWithObject(url, obj), string.IsNullOrEmpty(query) ? "" : "?", query));
 
-			return new Uri(string.Format("{0}{1}{2}{3}", BaseAddress, url, string.IsNullOrEmpty(query) ? "" : "?", query));
+			return new Uri(string.Format("{0}{1}{2}{3}", BaseAddress, FormatAddressWithObject(url, obj), string.IsNullOrEmpty(query) ? "" : "?", query));
 		}
 	}
 }

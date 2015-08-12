@@ -19,9 +19,13 @@ namespace AppCreator.ViewModels {
         public string Title { get; set; }
         public bool Updated { get; set; }
 
-        public BaseViewModel() {
-            CallUpdateOnAppear = true;
-        }
+		public BaseViewModel() {
+			CallUpdateOnAppear = true;
+		}
+
+		public BaseViewModel(bool updateOnAppear) {
+			CallUpdateOnAppear = updateOnAppear;
+		}
 
         protected Task Alert(string title = "App", string message = "", string okButton = "Ok") {
             return Alert(new AlertConfig {
@@ -60,8 +64,11 @@ namespace AppCreator.ViewModels {
             return Instances.Dialogs.PromptAsync(cfg);
         }
 
-        protected void Toast(string message, int timeoutSeconds = 3, Action act = null) {
-            Instances.Dialogs.Toast(message, timeoutSeconds, act);
+		protected void Toast(string message, ToastEvent evt = ToastEvent.Success, int timeoutSeconds = 3, Action act = null) {
+			Instances.Dialogs.Toast(new ToastConfig(evt, message) {
+				Duration = TimeSpan.FromSeconds((double) timeoutSeconds),
+				Action = act
+			});
         }
 
         public virtual async Task Update() {
