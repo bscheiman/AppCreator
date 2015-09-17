@@ -5,6 +5,9 @@ using Acr.UserDialogs;
 using AppCreator.Custom;
 using PropertyChanged;
 using Xamarin.Forms;
+using Connectivity.Plugin;
+using System.Collections.Generic;
+using Connectivity.Plugin.Abstractions;
 
 #endregion
 
@@ -19,8 +22,7 @@ namespace AppCreator.ViewModels {
         public string Title { get; set; }
         public bool Updated { get; set; }
 
-		public BaseViewModel() {
-			CallUpdateOnAppear = true;
+		public BaseViewModel() : this(true) {
 		}
 
 		public BaseViewModel(bool updateOnAppear) {
@@ -74,6 +76,9 @@ namespace AppCreator.ViewModels {
         public virtual async Task Update() {
             await Task.Run(() => { });
         }
+
+		protected bool IsConnected => CrossConnectivity.Current.IsConnected;
+		protected IEnumerable<ConnectionType> ConnectionTypes => CrossConnectivity.Current.ConnectionTypes;
     }
 
     [ImplementPropertyChanged]

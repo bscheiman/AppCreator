@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AppCreator {
+namespace AppCreator.Interfaces {
 	public interface IHardware {
 		bool IsSimulator { get; }
 	}

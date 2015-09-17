@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AppCreator {
+namespace AppCreator.Custom {
 	public class FALabel {
 		public FALabel() {
 		}
