@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace AppCreator.UI.Controls {
     [ImplementPropertyChanged]
     public class Spacer : Frame {
-        public int Space { get; set; }
+        public double Space { get; set; }
 
         public Spacer() {
             Space = 10;
