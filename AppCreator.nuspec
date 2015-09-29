@@ -11,54 +11,54 @@
         <tags>boris scheiman bscheiman common xamarin appcreator forms xamarinforms</tags>
         <dependencies>
             <group>
-                <dependency id="Acr.UserDialogs" version="4.1.3" />
+                <dependency id="Acr.UserDialogs" version="4.1.4" />
                 <dependency id="AsyncErrorHandler.Fody" version="1.0.5.0" />
                 <dependency id="Fody" version="1.29.0" />
                 <dependency id="modernhttpclient" version="2.4.2" />
                 <dependency id="Newtonsoft.Json" version="7.0.1" />
                 <dependency id="Polly" version="2.2.3" />
                 <dependency id="PropertyChanged.Fody" version="1.50.1" />
-                <dependency id="refit" version="2.3.0" />
+                <dependency id="refit" version="2.4.0" />
                 <dependency id="SQLite.Net.Async-PCL" version="3.0.5" />
                 <dependency id="SQLite.Net-PCL" version="3.0.5" />
-                <dependency id="Xamarin.Forms" version="1.4.4.6392" />
+                <dependency id="Xamarin.Forms" version="1.5.0.6447" />
                 <dependency id="Xamarin.Forms.Behaviors" version="1.3.1" />
                 <dependency id="Xam.Plugin.Battery" version="1.0.1" />
                 <dependency id="Xam.Plugin.Connectivity" version="1.0.4" />
-                <dependency id="Xam.Plugin.DeviceInfo" version="1.0.1" />
-                <dependency id="Xam.Plugin.Geolocator" version="1.0.4" />
+                <dependency id="Xam.Plugin.DeviceInfo" version="1.0.2" />
+                <dependency id="Xam.Plugin.Geolocator" version="1.1.0" />
             </group>
             <group targetFramework="MonoAndroid10">
-                <dependency id="Acr.UserDialogs" version="4.1.3" />
+                <dependency id="Acr.UserDialogs" version="4.1.4" />
                 <dependency id="modernhttpclient" version="2.4.2" />
                 <dependency id="Newtonsoft.Json" version="7.0.1" />
                 <dependency id="Polly" version="2.2.3" />
-                <dependency id="refit" version="2.3.0" />
+                <dependency id="refit" version="2.4.0" />
                 <dependency id="Splat" version="1.6.2" />
                 <dependency id="SQLite.Net.Async-PCL" version="3.0.5" />
                 <dependency id="SQLite.Net-PCL" version="3.0.5" />
-                <dependency id="Xamarin.Forms" version="1.4.4.6392" />
+                <dependency id="Xamarin.Forms" version="1.5.0.6447" />
                 <dependency id="Xamarin.Forms.Behaviors" version="1.3.1" />
                 <dependency id="Xam.Plugin.Battery" version="1.0.1" />
                 <dependency id="Xam.Plugin.Connectivity" version="1.0.4" />
-                <dependency id="Xam.Plugin.DeviceInfo" version="1.0.1" />
-                <dependency id="Xam.Plugin.Geolocator" version="1.0.4" />
+                <dependency id="Xam.Plugin.DeviceInfo" version="1.0.2" />
+                <dependency id="Xam.Plugin.Geolocator" version="1.1.0" />
             </group>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="Acr.UserDialogs" version="4.1.3" />
+                <dependency id="Acr.UserDialogs" version="4.1.4" />
                 <dependency id="modernhttpclient" version="2.4.2" />
                 <dependency id="Newtonsoft.Json" version="7.0.1" />
                 <dependency id="Polly" version="2.2.3" />
-                <dependency id="refit" version="2.3.0" />
+                <dependency id="refit" version="2.4.0" />
                 <dependency id="Splat" version="1.6.2" />
                 <dependency id="SQLite.Net.Async-PCL" version="3.0.5" />
                 <dependency id="SQLite.Net-PCL" version="3.0.5" />
-                <dependency id="Xamarin.Forms" version="1.4.4.6392" />
+                <dependency id="Xamarin.Forms" version="1.5.0.6447" />
                 <dependency id="Xamarin.Forms.Behaviors" version="1.3.1" />
                 <dependency id="Xam.Plugin.Battery" version="1.0.1" />
                 <dependency id="Xam.Plugin.Connectivity" version="1.0.4" />
-                <dependency id="Xam.Plugin.DeviceInfo" version="1.0.1" />
-                <dependency id="Xam.Plugin.Geolocator" version="1.0.4" />
+                <dependency id="Xam.Plugin.DeviceInfo" version="1.0.2" />
+                <dependency id="Xam.Plugin.Geolocator" version="1.1.0" />
             </group>
         </dependencies>
         <frameworkAssemblies>

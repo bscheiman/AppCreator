@@ -1,0 +1,261 @@
+﻿using System;
+using System.Collections.Generic;
+using Xamarin.Forms;
+using PropertyChanged;
+
+namespace AppCreator.Custom {
+	[ImplementPropertyChanged]
+	public class VectorIcon : Image {
+		public int Size { get;  set; }
+		public string Icon { get; set; }
+
+		protected void OnIconChanged() {
+			if (!Icons.ContainsKey(Icon))
+				throw new ArgumentOutOfRangeException("Invalid icon.");
+		}
+
+		protected static readonly Dictionary<string, string> Icons = new Dictionary<string, string>(StringComparer.CurrentCultureIgnoreCase);
+
+		static VectorIcon() {
+			#region Static icon mapping
+			#region Font-Awesome 4.4
+			Icons["fa-500px"] = "\xF26E";
+			Icons["fa-amazon"] = "\xF270";
+			Icons["fa-angellist"] = "\xF209";
+			Icons["fa-area-chart"] = "\xF1FE";
+			Icons["fa-arrow-circle-o-left"] = "\xF190";
+			Icons["fa-arrow-circle-o-right"] = "\xF18E";
+			Icons["fa-at"] = "\xF1FA";
+			Icons["fa-balance-scale"] = "\xF24E";
+			Icons["fa-battery-empty"] = "\xF244";
+			Icons["fa-battery-full"] = "\xF240";
+			Icons["fa-battery-half"] = "\xF242";
+			Icons["fa-battery-quarter"] = "\xF243";
+			Icons["fa-battery-three-quarters"] = "\xF241";
+			Icons["fa-bed"] = "\xF236";
+			Icons["fa-behance"] = "\xF1B4";
+			Icons["fa-behance-square"] = "\xF1B5";
+			Icons["fa-bell-slash"] = "\xF1F6";
+			Icons["fa-bell-slash-o"] = "\xF1F7";
+			Icons["fa-bicycle"] = "\xF206";
+			Icons["fa-binoculars"] = "\xF1E5";
+			Icons["fa-birthday-cake"] = "\xF1FD";
+			Icons["fa-black-tie"] = "\xF27E";
+			Icons["fa-bomb"] = "\xF1E2";
+			Icons["fa-building"] = "\xF1AD";
+			Icons["fa-bus"] = "\xF207";
+			Icons["fa-buysellads"] = "\xF20D";
+			Icons["fa-calculator"] = "\xF1EC";
+			Icons["fa-calendar-check-o"] = "\xF274";
+			Icons["fa-calendar-minus-o"] = "\xF272";
+			Icons["fa-calendar-plus-o"] = "\xF271";
+			Icons["fa-calendar-times-o"] = "\xF273";
+			Icons["fa-car"] = "\xF1B9";
+			Icons["fa-caret-square-o-left"] = "\xF191";
+			Icons["fa-cart-arrow-down"] = "\xF218";
+			Icons["fa-cart-plus"] = "\xF217";
+			Icons["fa-cc"] = "\xF20A";
+			Icons["fa-cc-amex"] = "\xF1F3";
+			Icons["fa-cc-diners-club"] = "\xF24C";
+			Icons["fa-cc-discover"] = "\xF1F2";
+			Icons["fa-cc-jcb"] = "\xF24B";
+			Icons["fa-cc-mastercard"] = "\xF1F1";
+			Icons["fa-cc-paypal"] = "\xF1F4";
+			Icons["fa-cc-stripe"] = "\xF1F5";
+			Icons["fa-cc-visa"] = "\xF1F0";
+			Icons["fa-child"] = "\xF1AE";
+			Icons["fa-chrome"] = "\xF268";
+			Icons["fa-circle-o-notch"] = "\xF1CE";
+			Icons["fa-circle-thin"] = "\xF1DB";
+			Icons["fa-clone"] = "\xF24D";
+			Icons["fa-codepen"] = "\xF1CB";
+			Icons["fa-commenting"] = "\xF27A";
+			Icons["fa-commenting-o"] = "\xF27B";
+			Icons["fa-connectdevelop"] = "\xF20E";
+			Icons["fa-contao"] = "\xF26D";
+			Icons["fa-copyright"] = "\xF1F9";
+			Icons["fa-creative-commons"] = "\xF25E";
+			Icons["fa-cube"] = "\xF1B2";
+			Icons["fa-cubes"] = "\xF1B3";
+			Icons["fa-dashcube"] = "\xF210";
+			Icons["fa-database"] = "\xF1C0";
+			Icons["fa-delicious"] = "\xF1A5";
+			Icons["fa-deviantart"] = "\xF1BD";
+			Icons["fa-diamond"] = "\xF219";
+			Icons["fa-digg"] = "\xF1A6";
+			Icons["fa-dot-circle-o"] = "\xF192";
+			Icons["fa-drupal"] = "\xF1A9";
+			Icons["fa-empire"] = "\xF1D1";
+			Icons["fa-envelope-square"] = "\xF199";
+			Icons["fa-expeditedssl"] = "\xF23E";
+			Icons["fa-eyedropper"] = "\xF1FB";
+			Icons["fa-facebook-official"] = "\xF230";
+			Icons["fa-fax"] = "\xF1AC";
+			Icons["fa-file-archive-o"] = "\xF1C6";
+			Icons["fa-file-audio-o"] = "\xF1C7";
+			Icons["fa-file-code-o"] = "\xF1C9";
+			Icons["fa-file-excel-o"] = "\xF1C3";
+			Icons["fa-file-image-o"] = "\xF1C5";
+			Icons["fa-file-pdf-o"] = "\xF1C1";
+			Icons["fa-file-powerpoint-o"] = "\xF1C4";
+			Icons["fa-file-video-o"] = "\xF1C8";
+			Icons["fa-file-word-o"] = "\xF1C2";
+			Icons["fa-firefox"] = "\xF269";
+			Icons["fa-fonticons"] = "\xF280";
+			Icons["fa-forumbee"] = "\xF211";
+			Icons["fa-futbol-o"] = "\xF1E3";
+			Icons["fa-genderless"] = "\xF22D";
+			Icons["fa-get-pocket"] = "\xF265";
+			Icons["fa-gg"] = "\xF260";
+			Icons["fa-gg-circle"] = "\xF261";
+			Icons["fa-git"] = "\xF1D3";
+			Icons["fa-git-square"] = "\xF1D2";
+			Icons["fa-google"] = "\xF1A0";
+			Icons["fa-google-wallet"] = "\xF1EE";
+			Icons["fa-graduation-cap"] = "\xF19D";
+			Icons["fa-hacker-news"] = "\xF1D4";
+			Icons["fa-hand-lizard-o"] = "\xF258";
+			Icons["fa-hand-paper-o"] = "\xF256";
+			Icons["fa-hand-peace-o"] = "\xF25B";
+			Icons["fa-hand-pointer-o"] = "\xF25A";
+			Icons["fa-hand-rock-o"] = "\xF255";
+			Icons["fa-hand-scissors-o"] = "\xF257";
+			Icons["fa-hand-spock-o"] = "\xF259";
+			Icons["fa-header"] = "\xF1DC";
+			Icons["fa-heartbeat"] = "\xF21E";
+			Icons["fa-history"] = "\xF1DA";
+			Icons["fa-hourglass"] = "\xF254";
+			Icons["fa-hourglass-end"] = "\xF253";
+			Icons["fa-hourglass-half"] = "\xF252";
+			Icons["fa-hourglass-o"] = "\xF250";
+			Icons["fa-hourglass-start"] = "\xF251";
+			Icons["fa-houzz"] = "\xF27C";
+			Icons["fa-i-cursor"] = "\xF246";
+			Icons["fa-ils"] = "\xF20B";
+			Icons["fa-industry"] = "\xF275";
+			Icons["fa-internet-explorer"] = "\xF26B";
+			Icons["fa-ioxhost"] = "\xF208";
+			Icons["fa-joomla"] = "\xF1AA";
+			Icons["fa-jsfiddle"] = "\xF1CC";
+			Icons["fa-language"] = "\xF1AB";
+			Icons["fa-lastfm"] = "\xF202";
+			Icons["fa-lastfm-square"] = "\xF203";
+			Icons["fa-leanpub"] = "\xF212";
+			Icons["fa-life-ring"] = "\xF1CD";
+			Icons["fa-line-chart"] = "\xF201";
+			Icons["fa-map"] = "\xF279";
+			Icons["fa-map-o"] = "\xF278";
+			Icons["fa-map-pin"] = "\xF276";
+			Icons["fa-map-signs"] = "\xF277";
+			Icons["fa-mars"] = "\xF222";
+			Icons["fa-mars-double"] = "\xF227";
+			Icons["fa-mars-stroke"] = "\xF229";
+			Icons["fa-mars-stroke-h"] = "\xF22B";
+			Icons["fa-mars-stroke-v"] = "\xF22A";
+			Icons["fa-meanpath"] = "\xF20C";
+			Icons["fa-medium"] = "\xF23A";
+			Icons["fa-mercury"] = "\xF223";
+			Icons["fa-motorcycle"] = "\xF21C";
+			Icons["fa-mouse-pointer"] = "\xF245";
+			Icons["fa-neuter"] = "\xF22C";
+			Icons["fa-newspaper-o"] = "\xF1EA";
+			Icons["fa-object-group"] = "\xF247";
+			Icons["fa-object-ungroup"] = "\xF248";
+			Icons["fa-odnoklassniki"] = "\xF263";
+			Icons["fa-odnoklassniki-square"] = "\xF264";
+			Icons["fa-opencart"] = "\xF23D";
+			Icons["fa-openid"] = "\xF19B";
+			Icons["fa-opera"] = "\xF26A";
+			Icons["fa-optin-monster"] = "\xF23C";
+			Icons["fa-pagelines"] = "\xF18C";
+			Icons["fa-paint-brush"] = "\xF1FC";
+			Icons["fa-paper-plane"] = "\xF1D8";
+			Icons["fa-paper-plane-o"] = "\xF1D9";
+			Icons["fa-paragraph"] = "\xF1DD";
+			Icons["fa-paw"] = "\xF1B0";
+			Icons["fa-paypal"] = "\xF1ED";
+			Icons["fa-pie-chart"] = "\xF200";
+			Icons["fa-pied-piper"] = "\xF1A7";
+			Icons["fa-pied-piper-alt"] = "\xF1A8";
+			Icons["fa-pinterest-p"] = "\xF231";
+			Icons["fa-plug"] = "\xF1E6";
+			Icons["fa-plus-square-o"] = "\xF196";
+			Icons["fa-qq"] = "\xF1D6";
+			Icons["fa-rebel"] = "\xF1D0";
+			Icons["fa-recycle"] = "\xF1B8";
+			Icons["fa-reddit"] = "\xF1A1";
+			Icons["fa-reddit-square"] = "\xF1A2";
+			Icons["fa-registered"] = "\xF25D";
+			Icons["fa-rub"] = "\xF158";
+			Icons["fa-safari"] = "\xF267";
+			Icons["fa-sellsy"] = "\xF213";
+			Icons["fa-server"] = "\xF233";
+			Icons["fa-share-alt"] = "\xF1E0";
+			Icons["fa-share-alt-square"] = "\xF1E1";
+			Icons["fa-ship"] = "\xF21A";
+			Icons["fa-shirtsinbulk"] = "\xF214";
+			Icons["fa-simplybuilt"] = "\xF215";
+			Icons["fa-skyatlas"] = "\xF216";
+			Icons["fa-slack"] = "\xF198";
+			Icons["fa-sliders"] = "\xF1DE";
+			Icons["fa-slideshare"] = "\xF1E7";
+			Icons["fa-soundcloud"] = "\xF1BE";
+			Icons["fa-space-shuttle"] = "\xF197";
+			Icons["fa-spoon"] = "\xF1B1";
+			Icons["fa-spotify"] = "\xF1BC";
+			Icons["fa-stack-exchange"] = "\xF18D";
+			Icons["fa-steam"] = "\xF1B6";
+			Icons["fa-steam-square"] = "\xF1B7";
+			Icons["fa-sticky-note"] = "\xF249";
+			Icons["fa-sticky-note-o"] = "\xF24A";
+			Icons["fa-street-view"] = "\xF21D";
+			Icons["fa-stumbleupon"] = "\xF1A4";
+			Icons["fa-stumbleupon-circle"] = "\xF1A3";
+			Icons["fa-subway"] = "\xF239";
+			Icons["fa-taxi"] = "\xF1BA";
+			Icons["fa-television"] = "\xF26C";
+			Icons["fa-tencent-weibo"] = "\xF1D5";
+			Icons["fa-toggle-off"] = "\xF204";
+			Icons["fa-toggle-on"] = "\xF205";
+			Icons["fa-trademark"] = "\xF25C";
+			Icons["fa-train"] = "\xF238";
+			Icons["fa-transgender"] = "\xF224";
+			Icons["fa-transgender-alt"] = "\xF225";
+			Icons["fa-trash"] = "\xF1F8";
+			Icons["fa-tree"] = "\xF1BB";
+			Icons["fa-tripadvisor"] = "\xF262";
+			Icons["fa-try"] = "\xF195";
+			Icons["fa-tty"] = "\xF1E4";
+			Icons["fa-twitch"] = "\xF1E8";
+			Icons["fa-university"] = "\xF19C";
+			Icons["fa-user-plus"] = "\xF234";
+			Icons["fa-user-secret"] = "\xF21B";
+			Icons["fa-user-times"] = "\xF235";
+			Icons["fa-venus"] = "\xF221";
+			Icons["fa-venus-double"] = "\xF226";
+			Icons["fa-venus-mars"] = "\xF228";
+			Icons["fa-viacoin"] = "\xF237";
+			Icons["fa-vimeo"] = "\xF27D";
+			Icons["fa-vimeo-square"] = "\xF194";
+			Icons["fa-vine"] = "\xF1CA";
+			Icons["fa-weixin"] = "\xF1D7";
+			Icons["fa-whatsapp"] = "\xF232";
+			Icons["fa-wheelchair"] = "\xF193";
+			Icons["fa-wifi"] = "\xF1EB";
+			Icons["fa-wikipedia-w"] = "\xF266";
+			Icons["fa-wordpress"] = "\xF19A";
+			Icons["fa-y-combinator"] = "\xF23B";
+			Icons["fa-yahoo"] = "\xF19E";
+			Icons["fa-yelp"] = "\xF1E9";
+
+			#endregion
+			#endregion
+		}
+
+		public VectorIcon() {
+			HeightRequest = Size;
+			WidthRequest = Size;
+		}
+	}
+}
+

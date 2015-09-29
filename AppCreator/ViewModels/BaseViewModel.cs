@@ -77,16 +77,16 @@ namespace AppCreator.ViewModels {
             await Task.Run(() => { });
         }
 
-		protected bool IsConnected => CrossConnectivity.Current.IsConnected;
-		protected IEnumerable<ConnectionType> ConnectionTypes => CrossConnectivity.Current.ConnectionTypes;
+		protected bool IsConnected => Instances.Connectivity.IsConnected;
+		protected IEnumerable<ConnectionType> ConnectionTypes => Instances.Connectivity.ConnectionTypes;
     }
 
     [ImplementPropertyChanged]
     public class BaseViewModel<T> : BaseViewModel {
-        public ObservableCollectionEx<T> Collection { get; set; }
+		public List<T> Collection { get; set; }
 
         public BaseViewModel() {
-            Collection = new ObservableCollectionEx<T>();
+			Collection = new List<T>();
         }
     }
 }

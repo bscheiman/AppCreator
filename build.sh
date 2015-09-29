@@ -14,4 +14,9 @@ xbuild /t:Rebuild /p:Configuration=Release
 nuget pack AppCreator.nuspec -Version $1 -Verbosity detailed
 nuget pack AppCreator.UI.nuspec -Version $1 -Verbosity detailed
 
-mv -f *.nupkg /Users/bscheiman/NuGet/
+cp -f *.nupkg /Users/bscheiman/NuGet/
+
+if [ "$2" = "push" ]; then
+  nuget push AppCreator.$1.nupkg
+  nuget push AppCreator.UI.$1.nupkg
+fi
