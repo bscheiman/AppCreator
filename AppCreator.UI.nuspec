@@ -33,14 +33,14 @@
 
       <!-- Xamarin.iOS -->
       <file src="AppCreator.iOS/bin/iPhone/Release/AppCreator*" target="lib/xamarinios10" />
-      <file src="AppCreator.iOS/Content/Implementations/Notes.txt" target="content/xamarinios10/Implementations" />
-      <file src="AppCreator.iOS/Content/Renderers/Notes.txt" target="content/xamarinios10/Renderers" />
       <file src="AppCreator.iOS/Content/Initializers/Init.cs" target="content/xamarinios10/Initializers" />
+      <!-- <file src="AppCreator.iOS/Content/Implementations/Notes.txt" target="content/xamarinios10/Implementations" />
+      <file src="AppCreator.iOS/Content/Renderers/Notes.txt" target="content/xamarinios10/Renderers" /> -->
 
       <!-- Xamarin.Android -->
       <file src="AppCreator.Droid/bin/Release/AppCreator*" target="lib/MonoAndroid10" />
-      <file src="AppCreator.Droid/Content/Implementations/Notes.txt" target="content/MonoAndroid10/Implementations" />
-      <file src="AppCreator.Droid/Content/Renderers/Notes.txt" target="content/MonoAndroid10/Renderers" />
       <file src="AppCreator.Droid/Content/Initializers/Init.cs" target="content/MonoAndroid10/Initializers" />
+      <!-- <file src="AppCreator.Droid/Content/Implementations/Notes.txt" target="content/MonoAndroid10/Implementations" />
+      <file src="AppCreator.Droid/Content/Renderers/Notes.txt" target="content/MonoAndroid10/Renderers" /> -->
     </files>
 </package>

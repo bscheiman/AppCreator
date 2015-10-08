@@ -14,229 +14,167 @@ using System.Diagnostics;
 
 namespace AppCreator.Json {
 	public abstract class BaseJsonClient {
-		protected Uri BaseAddress { get; set; }
-
 		internal bool DebugMode { get; set; }
 
 		protected BaseJsonClient(string baseAddress, bool debug = false) {
-			BaseAddress = new Uri(baseAddress);
+			FormattedUri.BaseAddress = new Uri(baseAddress);
 			DebugMode = debug;
 		}
 
-		protected abstract void ModifyHandler(HttpMessageHandler handler, HttpMethod method);
-		protected abstract void HandleException(Exception ex);
 		protected abstract void PreExecution();
 		protected abstract void PostExecution();
 		protected abstract bool CanRun();
+		protected abstract void HandleException(Exception ex);
 
-		protected HttpMessageHandler GetHandler(HttpMethod method) {
-			var handler = new NativeMessageHandler {
-				AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
-			};
+		protected virtual HttpClient ModifyClient(HttpClient client, HttpMethod method) {
+			return client;
+		}
 
-			ModifyHandler(handler, method);
+		protected virtual HttpRequestMessage ModifyMessage(HttpRequestMessage message, HttpMethod method) {
+			return message;
+		}
 
+		protected virtual HttpMessageHandler ModifyHandler(HttpMessageHandler handler, HttpMethod method) {
 			return handler;
 		}
 
-		protected async Task<T> Post<T>(string url, object obj = null) {
-			if (!CanRun())
-				return default(T);
-			
-			PreExecution();
+		protected HttpMessageHandler GetHandler(HttpMethod method) {
+			return ModifyHandler(new NativeMessageHandler {
+				AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
+			}, method);
+		}
 
+		protected async Task<HttpResponseMessage> Send<T>(HttpMethod method, FormattedUri uri, HttpContent content = null) {
 			try {
-				using (var httpClient = new HttpClient(GetHandler(HttpMethod.Post))) {
-					var json = obj.ToJson();
+				PreExecution();
 
+				if (!CanRun()) {
 					if (DebugMode)
-						Debug.WriteLine("POST / TX: {0}", json);
+						Debug.WriteLine("Can't run...");
 					
-					var res = await httpClient.PostAsync(GetUrl(url),
-					                                     new StringContent(json,
-					                                                       Encoding.UTF8,
-					                                                       "application/json"));
-					var msg = await res.Content.ReadAsStringAsync();
-
-					if (DebugMode)
-						Debug.WriteLine("POST / RX: {0}", msg);
-
-					return msg.FromJson<T>();
+					return new HttpResponseMessage { Content = new StringContent("can't run") };
 				}
-			} catch (Exception ex) {
-				HandleException(ex);
 
-				return default(T);
-			} finally {
-				PostExecution();
-			}
-		}
+				using (var httpClient = ModifyClient(new HttpClient(GetHandler(method)), method)) {
+					var finalUri = uri.ToString();
 
-		protected async Task<T> Put<T>(string url, object obj = null) {
-			if (!CanRun())
-				return default(T);
-
-			PreExecution();
-
-			try {
-				using (var httpClient = new HttpClient(GetHandler(HttpMethod.Put))) {
-					var json = obj.ToJson();
-
-					if (DebugMode)
-						Debug.WriteLine("PUT / TX: {0}", json);
-
-					var res = await httpClient.PutAsync(GetUrl(url),
-					                                    new StringContent(json,
-					                                                     Encoding.UTF8,
-					                                                     "application/json"));
-					var msg = await res.Content.ReadAsStringAsync();
-
-					if (DebugMode)
-						Debug.WriteLine("PUT / RX: {0}", msg);
-				
-					return msg.FromJson<T>();
-				}
-			} catch (Exception ex) {
-				HandleException(ex);
-
-				return default(T);
-			} finally {
-				PostExecution();
-			}
-		}
-
-		protected async Task<T> Get<T>(string url, Dictionary<string, string> keyValues = null) {
-			if (!CanRun())
-				return default(T);
-
-			PreExecution();
-
-			try {
-				if (keyValues == null)
-					keyValues = new Dictionary<string, string>();
-
-				using (var httpClient = new HttpClient(GetHandler(HttpMethod.Get))) {
-					var parms = string.Join("&", keyValues.Select(m => string.Format("{0}={1}", m.Key, Uri.EscapeUriString(m.Value))));
-					var fullUrl = GetUrl(url, parms);
-
-					if (DebugMode)
-						Debug.WriteLine("GET / TX: {0}", fullUrl);
-
-					var res = await httpClient.GetAsync(fullUrl).ConfigureAwait(false);
-					var msg = await res.Content.ReadAsStringAsync();
-
-					if (DebugMode)
-						Debug.WriteLine("GET / RX: {0}", msg);
-
-					return msg.FromJson<T>();
-				}
-			} catch (Exception ex) {
-				HandleException(ex);
-
-				return default(T);
-			} finally {
-				PostExecution();
-			}
-		}
-
-		protected async Task<T> Delete<T>(string url, Dictionary<string, string> keyValues = null) {
-			if (!CanRun())
-				return default(T);
-
-			PreExecution();
-
-			try {
-				if (keyValues == null)
-					keyValues = new Dictionary<string, string>();
-
-				using (var httpClient = new HttpClient(GetHandler(HttpMethod.Get))) {
-					var parms = string.Join("&", keyValues.Select(m => string.Format("{0}={1}", m.Key, Uri.EscapeUriString(m.Value))));
-					var fullUrl = GetUrl(url, parms);
-
-					if (DebugMode)
-						Debug.WriteLine("DELETE / TX: {0}", fullUrl);
-
-					var res = await httpClient.DeleteAsync(fullUrl).ConfigureAwait(false);
-					var msg = await res.Content.ReadAsStringAsync();
-
-					if (DebugMode)
-						Debug.WriteLine("DELETE / RX: {0}", msg);
-
-					return msg.FromJson<T>();
-				}
-			} catch (Exception ex) {
-				HandleException(ex);
-
-				return default(T);
-			} finally {
-				PostExecution();
-			}
-		}
-
-		protected async Task<T> PostFormDataContent<T>(string url, Dictionary<string, string> keyValues = null) {
-			if (!CanRun())
-				return default(T);
-
-			PreExecution();
-
-			try {
-				keyValues = keyValues ?? new Dictionary<string, string>();
-
-				using (var httpClient = new HttpClient(GetHandler(HttpMethod.Post))) {
-					var content = new MultipartFormDataContent();
-
-					foreach (var k in keyValues) {
-						content.Add(new StringContent(k.Value), k.Key);
-
-						if (DebugMode)
-							Debug.WriteLine("POST / TXFORM: {0} - {1}", k.Key, k.Value);
+					if (DebugMode) {
+						Debug.WriteLine("{0} / TX / URL: {1}", method.Method.ToUpper(), finalUri);
+						Debug.WriteLine("{0} / TX / PLD: {1}", method.Method.ToUpper(), content == null ? "--EMPTY--" : await content.ReadAsStringAsync());
 					}
 
+					var req = new HttpRequestMessage(method, finalUri);
 
-					var res = await httpClient.PostAsync(GetUrl(url), content);
-					var msg = await res.Content.ReadAsStringAsync();
+					if (content != null)
+						req.Content = content;
+
+					var msg = await ModifyClient(httpClient, method).SendAsync(ModifyMessage(req, method)).ConfigureAwait(false);
 
 					if (DebugMode)
-						Debug.WriteLine("POST / RXFORM: {0}", msg);
+						Debug.WriteLine("{0} / RX: {1}", method.Method.ToUpper(), await msg.Content.ReadAsStringAsync());
 
-					return msg.FromJson<T>();
+					return msg;
 				}
 			} catch (Exception ex) {
 				HandleException(ex);
 
-				return default(T);
+				if (DebugMode)
+					Debug.WriteLine("Exception: " + ex);
+				
+				return new HttpResponseMessage { Content = new StringContent("exception occurred") };
 			} finally {
 				PostExecution();
 			}
 		}
 
-		protected async Task<T> PutFormDataContent<T>(string url, Dictionary<string, string> keyValues = null) {
-			if (!CanRun())
-				return default(T);
+		protected async Task<int> Status(FormattedUri uri) {
+			return CanRun() ? (int) (await Send<int>(HttpMethod.Get, uri)).StatusCode : -1;
+		}
 
-			PreExecution();
+		protected async Task<int> Status(string uri, object parameters) {
+			return await Status(new FormattedUri(uri, parameters));
+		}
 
-			try {
-				keyValues = keyValues ?? new Dictionary<string, string>();
+		protected async Task<T> Post<T>(FormattedUri uri, object postedObject = null) {
+			postedObject = postedObject ?? new object();
 
-				using (var httpClient = new HttpClient(GetHandler(HttpMethod.Put))) {
-					var content = new MultipartFormDataContent();
+			var res = await Send<T>(HttpMethod.Post, uri, new StringContent(postedObject.ToJson(),
+			                                                                Encoding.UTF8,
+			                                                                "application/json"));
+			var msg = await res.Content.ReadAsStringAsync();
 
-					foreach (var k in keyValues)
-						content.Add(new StringContent(k.Value), k.Key);
 
-					var res = await httpClient.PutAsync(GetUrl(url), content);
-					var msg = await res.Content.ReadAsStringAsync();
+			return msg.FromJson<T>();
+		}
 
-					return msg.FromJson<T>();
-				}
-			} catch (Exception ex) {
-				HandleException(ex);
+		protected Task<T> Post<T>(string uri, object urlParameters, object postedObject = null) {
+			return Post<T>(new FormattedUri(uri, urlParameters), postedObject);
+		}
 
-				return default(T);
-			} finally {
-				PostExecution();
-			}
+		protected async Task<T> Patch<T>(FormattedUri uri, object postedObject = null) {
+			postedObject = postedObject ?? new object();
+
+			var res = await Send<T>(new HttpMethod("PATCH"), uri, new StringContent(postedObject.ToJson(),
+			                                                                        Encoding.UTF8,
+			                                                                        "application/json"));
+			return (await res.Content.ReadAsStringAsync()).FromJson<T>();
+		}
+
+		protected Task<T> Patch<T>(string uri, object urlParameters, object postedObject = null) {
+			return Patch<T>(new FormattedUri(uri, urlParameters), postedObject);
+		}
+
+		protected async Task<T> Put<T>(FormattedUri uri, object postedObject = null) {
+			postedObject = postedObject ?? new object();
+
+			var res = await Send<T>(HttpMethod.Put, uri, new StringContent(postedObject.ToJson(),
+			                                                               Encoding.UTF8,
+			                                                               "application/json"));
+			return (await res.Content.ReadAsStringAsync()).FromJson<T>();
+		}
+
+		protected Task<T> Put<T>(string uri, object urlParameters, object postedObject = null) {
+			return Put<T>(new FormattedUri(uri, urlParameters), postedObject);
+		}
+
+		protected Task<T> Get<T>(string uri, object parameters) {
+			return Get<T>(new FormattedUri(uri, parameters));
+		}
+
+		protected Task<T> Get<T>(string uri, Dictionary<string, string> keyValues) {
+			return Get<T>(new FormattedUri(uri, keyValues));
+		}
+
+		protected async Task<T> Get<T>(FormattedUri uri) {
+			var res = await Send<T>(HttpMethod.Get, uri);
+
+			return (await res.Content.ReadAsStringAsync()).FromJson<T>();
+		}
+
+		protected async Task<T> Delete<T>(FormattedUri uri) {
+			var res = await Send<T>(HttpMethod.Delete, uri);
+
+			return (await res.Content.ReadAsStringAsync()).FromJson<T>();
+		}
+
+		protected Task<T> Delete<T>(string uri, object urlParameters) {
+			return Delete<T>(new FormattedUri(uri, urlParameters));
+		}
+
+		protected async Task<T> PostFormDataContent<T>(FormattedUri uri, Dictionary<string, string> keyValues = null) {
+			keyValues = keyValues ?? new Dictionary<string, string>();
+
+			var res = await Send<T>(HttpMethod.Post, uri, new FormUrlEncodedContent(keyValues.Select(x => new KeyValuePair<string, string>(x.Key, x.Value))));
+
+			return (await res.Content.ReadAsStringAsync()).FromJson<T>();
+		}
+
+		protected async Task<T> PutFormDataContent<T>(FormattedUri uri, Dictionary<string, string> keyValues = null) {
+			keyValues = keyValues ?? new Dictionary<string, string>();
+
+			var res = await Send<T>(HttpMethod.Post, uri, new FormUrlEncodedContent(keyValues.Select(x => new KeyValuePair<string, string>(x.Key, x.Value))));
+
+			return (await res.Content.ReadAsStringAsync()).FromJson<T>();
 		}
 
 		protected FormUrlEncodedContent ObjectToFormContent(object obj) {
@@ -248,22 +186,6 @@ namespace AppCreator.Json {
 
 			return new FormUrlEncodedContent(properties.Select(p => new KeyValuePair<string, string>(p.Name,
 			                                                                                         p.GetValue(obj).ToString())).ToList());
-		}
-
-		protected Uri GetUrl(string url, string query = "") {
-			var isAbsolute = url.StartsWith("http");
-
-			return isAbsolute 
-					? new Uri(string.Format("{0}{1}{2}",
-			                          url,
-			                          string.IsNullOrEmpty(query) ? "" : "?",
-			                          query)) 
-					: new Uri(string.Format("{0}{1}{2}{3}",
-			                          BaseAddress,
-			                          url,
-			                          string.IsNullOrEmpty(query) ? "" : "?",
-			                          query));
-
 		}
 	}
 }

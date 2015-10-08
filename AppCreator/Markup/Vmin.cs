@@ -1,18 +1,9 @@
-using System;
 using AppCreator.Helpers;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace AppCreator.Markup {
-	[ContentProperty("Units")]
-	public class Vmin : IMarkupExtension {
-		public string Units { get; set; }
-
-		public object ProvideValue(IServiceProvider serviceProvider) {
-			if (Units == null)
-				return null;
-
-			return RelativeSizeHelper.Vmin(double.Parse(Units));
+	public class Vmin : RelativeTo {
+		public override double RelativeFunction(double units) {
+			return RelativeSizeHelper.Vmin(units);
 		}
 	}
 }

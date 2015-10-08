@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Connectivity.Plugin;
 using System.Collections.Generic;
 using Connectivity.Plugin.Abstractions;
+using System.Windows.Input;
 
 #endregion
 
@@ -76,6 +77,12 @@ namespace AppCreator.ViewModels {
         public virtual async Task Update() {
             await Task.Run(() => { });
         }
+
+		public ICommand Refresh {
+			get {
+				return new Command(async s => await Update());
+			}
+		}
 
 		protected bool IsConnected => Instances.Connectivity.IsConnected;
 		protected IEnumerable<ConnectionType> ConnectionTypes => Instances.Connectivity.ConnectionTypes;
