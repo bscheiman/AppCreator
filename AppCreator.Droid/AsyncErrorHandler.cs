@@ -1,13 +1,13 @@
 ﻿#region
 using System;
-using System.Diagnostics;
+using AppCreator.Helpers;
 
 #endregion
 
 namespace AppCreator.UI {
     public static class AsyncErrorHandler {
         public static void HandleException(Exception exception) {
-			Debug.WriteLine(exception);
+			Util.Log(exception);
         }
     }
 }

@@ -59,6 +59,7 @@
     <Compile Include="AsyncErrorHandler.cs" />
     <Compile Include="Implementations\Hardware.cs" />
     <Compile Include="Implementations\ScreenSize.cs" />
+    <Compile Include="Implementations\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

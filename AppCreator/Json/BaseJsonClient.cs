@@ -1,6 +1,4 @@
-﻿#define DEBUG
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Net.Http;
 using AppCreator.Extensions;
@@ -10,6 +8,8 @@ using ModernHttpClient;
 using System.Linq;
 using System.Reflection;
 using System.Net;
+using System.Globalization;
+using AppCreator.Helpers;
 using System.Diagnostics;
 
 namespace AppCreator.Json {
@@ -38,10 +38,24 @@ namespace AppCreator.Json {
 			return handler;
 		}
 
+		protected virtual async Task<T> WrapRequests<T>(Func<Task<T>> func)  {
+			return (await func());
+		}
+
 		protected HttpMessageHandler GetHandler(HttpMethod method) {
 			return ModifyHandler(new NativeMessageHandler {
 				AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
 			}, method);
+		}
+
+		private string GenerateId() {
+			var random = new Random();
+			var sb = new StringBuilder();
+
+			for (int i = 0; i < 6; i++)
+				sb.Append(Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65))));
+
+			return sb.ToString();
 		}
 
 		protected async Task<HttpResponseMessage> Send<T>(HttpMethod method, FormattedUri uri, HttpContent content = null) {
@@ -50,17 +64,19 @@ namespace AppCreator.Json {
 
 				if (!CanRun()) {
 					if (DebugMode)
-						Debug.WriteLine("Can't run...");
+						Util.Log("Can't run...");
 					
 					return new HttpResponseMessage { Content = new StringContent("can't run") };
 				}
 
 				using (var httpClient = ModifyClient(new HttpClient(GetHandler(method)), method)) {
 					var finalUri = uri.ToString();
+					var id = GenerateId();
+					var sw = Stopwatch.StartNew();
 
 					if (DebugMode) {
-						Debug.WriteLine("{0} / TX / URL: {1}", method.Method.ToUpper(), finalUri);
-						Debug.WriteLine("{0} / TX / PLD: {1}", method.Method.ToUpper(), content == null ? "--EMPTY--" : await content.ReadAsStringAsync());
+						Util.Log("{0} / {1} / TX / URL: {2}", method.Method.ToUpper(), id, finalUri);
+						Util.Log("{0} / {1} / TX / PLD: {2}", method.Method.ToUpper(), id, content == null ? "--EMPTY--" : await content.ReadAsStringAsync());
 					}
 
 					var req = new HttpRequestMessage(method, finalUri);
@@ -70,8 +86,10 @@ namespace AppCreator.Json {
 
 					var msg = await ModifyClient(httpClient, method).SendAsync(ModifyMessage(req, method)).ConfigureAwait(false);
 
+					sw.Stop();
+
 					if (DebugMode)
-						Debug.WriteLine("{0} / RX: {1}", method.Method.ToUpper(), await msg.Content.ReadAsStringAsync());
+						Util.Log("{0} / {1} / RX / {2}ms: {3}", method.Method.ToUpper(), id, sw.ElapsedMilliseconds.ToString("N0", new CultureInfo("en-US")), await msg.Content.ReadAsStringAsync());
 
 					return msg;
 				}
@@ -79,7 +97,7 @@ namespace AppCreator.Json {
 				HandleException(ex);
 
 				if (DebugMode)
-					Debug.WriteLine("Exception: " + ex);
+					Util.Log("Exception: " + ex);
 				
 				return new HttpResponseMessage { Content = new StringContent("exception occurred") };
 			} finally {
@@ -87,8 +105,16 @@ namespace AppCreator.Json {
 			}
 		}
 
+		protected async Task<int> Status(HttpMethod method, FormattedUri uri) {
+			return CanRun() ? (int) (await Send<int>(method, uri)).StatusCode : -1;
+		}
+
 		protected async Task<int> Status(FormattedUri uri) {
 			return CanRun() ? (int) (await Send<int>(HttpMethod.Get, uri)).StatusCode : -1;
+		}
+
+		protected async Task<int> Status(HttpMethod method, string uri, object parameters) {
+			return await Status(method, new FormattedUri(uri, parameters));
 		}
 
 		protected async Task<int> Status(string uri, object parameters) {
