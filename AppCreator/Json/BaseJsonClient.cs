@@ -14,8 +14,9 @@ using System.Diagnostics;
 
 namespace AppCreator.Json {
 	public abstract class BaseJsonClient {
-		internal bool DebugMode { get; set; }
+		internal static Random Random = new Random();
 
+		internal bool DebugMode { get; set; }
 		protected BaseJsonClient(string baseAddress, bool debug = false) {
 			FormattedUri.BaseAddress = new Uri(baseAddress);
 			DebugMode = debug;
@@ -49,11 +50,10 @@ namespace AppCreator.Json {
 		}
 
 		private string GenerateId() {
-			var random = new Random();
 			var sb = new StringBuilder();
 
 			for (int i = 0; i < 6; i++)
-				sb.Append(Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65))));
+				sb.Append(Convert.ToChar(Convert.ToInt32(Math.Floor(26 * Random.NextDouble() + 65))));
 
 			return sb.ToString();
 		}

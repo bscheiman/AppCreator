@@ -1,5 +1,7 @@
-﻿using AppCreator.Interfaces;
+﻿#define DEBUG
+using AppCreator.Interfaces;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace AppCreator.Helpers {
 	public static class Util {
@@ -10,7 +12,10 @@ namespace AppCreator.Helpers {
 		}
 
 		public static void Log(string str) {
-			MainLogger.Log(str);
+			if (MainLogger != null)
+				MainLogger.Log(str);
+			else
+				Debug.WriteLine(str);
 		}
 
 		public static void Log(object obj) {
