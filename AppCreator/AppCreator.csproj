@@ -70,6 +70,7 @@
     <Compile Include="Json\FormattedUri.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Helpers\Util.cs" />
+    <Compile Include="Data\PropertyBackedValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml">
