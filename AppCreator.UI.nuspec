@@ -11,18 +11,18 @@
         <tags>boris scheiman bscheiman common xamarin appcreator appcreator.ui forms xamarinforms</tags>
         <dependencies>
             <group>
-                <dependency id="Acr.UserDialogs" version="4.1.4" />
-                <dependency id="Xamarin.Forms" version="1.5.0.6447" />
+                <dependency id="Acr.UserDialogs" version="4.1.8" />
+                <dependency id="Xamarin.Forms" version="2.0.0.6484" />
                 <dependency id="AppCreator" version="$version$" />
             </group>
             <group targetFramework="MonoAndroid10">
-                <dependency id="Acr.UserDialogs" version="4.1.4" />
-                <dependency id="Xamarin.Forms" version="1.5.0.6447" />
+                <dependency id="Acr.UserDialogs" version="4.1.8" />
+                <dependency id="Xamarin.Forms" version="2.0.0.6484" />
                 <dependency id="AppCreator" version="$version$" />
             </group>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="Acr.UserDialogs" version="4.1.4" />
-                <dependency id="Xamarin.Forms" version="1.5.0.6447" />
+                <dependency id="Acr.UserDialogs" version="4.1.8" />
+                <dependency id="Xamarin.Forms" version="2.0.0.6484" />
                 <dependency id="AppCreator" version="$version$" />
             </group>
         </dependencies>
