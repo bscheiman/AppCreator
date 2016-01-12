@@ -2,14 +2,14 @@
 // Analysis disable RedundantUsingDirective
 using Acr.UserDialogs;
 using AppCreator.Interfaces;
-using Battery.Plugin.Abstractions;
-using Connectivity.Plugin.Abstractions;
-using DeviceInfo.Plugin.Abstractions;
-using Geolocator.Plugin.Abstractions;
-using Geolocator.Plugin;
-using Battery.Plugin;
-using Connectivity.Plugin;
-using DeviceInfo.Plugin;
+using Plugin.Battery;
+using Plugin.Battery.Abstractions;
+using Plugin.Connectivity;
+using Plugin.Connectivity.Abstractions;
+using Plugin.DeviceInfo;
+using Plugin.DeviceInfo.Abstractions;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 using Xamarin.Forms;
 // Analysis restore RedundantUsingDirective
 

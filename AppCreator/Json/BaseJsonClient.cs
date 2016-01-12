@@ -11,17 +11,16 @@ using System.Net;
 using System.Globalization;
 using AppCreator.Helpers;
 using System.Diagnostics;
+using Polly;
+using AppCreator.Exceptions;
 
 namespace AppCreator.Json {
 	public abstract class BaseJsonClient {
 		internal static Random Random = new Random();
-
-		internal bool DebugMode { get; set; }
 		internal bool ReturnNull { get; set; }
 
-		protected BaseJsonClient(string baseAddress, bool returnNull, bool debug) {
+		protected BaseJsonClient(string baseAddress, bool returnNull) {
 			FormattedUri.BaseAddress = new Uri(baseAddress);
-			DebugMode = debug;
 			ReturnNull = returnNull;
 		}
 
@@ -32,19 +31,31 @@ namespace AppCreator.Json {
 		protected async virtual Task<T> ReadJson<T>(HttpResponseMessage message) where T : new() {
 			try {
 				return (await message.Content.ReadAsStringAsync()).FromJson<T>();
-			} catch (FormatException) {
+			} catch (FormatException ex) {
+				HandleException(string.Empty, ex);
+
 				Util.Log("--- INVALID JSON ---");
 
 				return ReturnNull ? default(T) : new T();
-			} catch {
+			} catch (Exception ex) {
+				HandleException(string.Empty, ex);
+
 				Util.Log("--- EXT. SERVICE ERROR ---");
 
 				return ReturnNull ? default(T) : new T();
 			}
 		}
 
-		protected virtual void HandleException(Exception ex) {
+		protected virtual void HandleException(string id, Exception ex) {
 			Util.Log("HandleException: {0}", ex.ToString());
+		}
+
+		protected virtual Policy GetPolicy() {
+			return Policy.Handle<Exception>().WaitAndRetryAsync(
+				1, 
+				s => TimeSpan.FromSeconds(Math.Pow(2, s)),
+				(e, t) => { }
+			);
 		}
 
 		protected virtual HttpClient ModifyClient(HttpClient client, HttpMethod method) {
@@ -79,45 +90,45 @@ namespace AppCreator.Json {
 		}
 
 		protected async Task<HttpResponseMessage> Send<T>(HttpMethod method, FormattedUri uri, HttpContent content = null) where T : new() {
+			var id = GenerateId();
+
 			try {
 				PreExecution();
 
 				if (!CanRun()) {
-					if (DebugMode)
-						Util.Log("Can't run...");
-					
-					return new HttpResponseMessage { Content = new StringContent("can't run") };
+					Util.Log("Can't run...");
+
+					throw new NoConnectionException();
 				}
 
-				using (var httpClient = ModifyClient(new HttpClient(GetHandler(method)), method)) {
-					var finalUri = uri.ToString();
-					var id = GenerateId();
-					var sw = Stopwatch.StartNew();
+				var policy = GetPolicy();
 
-					if (DebugMode) {
+				return await policy.ExecuteAsync(async () => {
+					using (var httpClient = ModifyClient(new HttpClient(GetHandler(method)), method)) {
+						var finalUri = uri.ToString();
+						var sw = Stopwatch.StartNew();
+
 						Util.Log("{0} / {1} / TX / URL: {2}", method.Method.ToUpper(), id, finalUri);
 						Util.Log("{0} / {1} / TX / PLD: {2}", method.Method.ToUpper(), id, content == null ? "--EMPTY--" : await content.ReadAsStringAsync());
-					}
 
-					var req = new HttpRequestMessage(method, finalUri);
+						var req = new HttpRequestMessage(method, finalUri);
 
-					if (content != null)
-						req.Content = content;
+						if (content != null)
+							req.Content = content;
 
-					var msg = await ModifyClient(httpClient, method).SendAsync(ModifyMessage(req, method)).ConfigureAwait(false);
+						var msg = await ModifyClient(httpClient, method).SendAsync(ModifyMessage(req, method)).ConfigureAwait(false);
 
-					sw.Stop();
+						sw.Stop();
 
-					if (DebugMode)
 						Util.Log("{0} / {1} / RX / {2}ms: {3}", method.Method.ToUpper(), id, sw.ElapsedMilliseconds.ToString("N0", new CultureInfo("en-US")), await msg.Content.ReadAsStringAsync());
 
-					return msg;
-				}
+						return msg;
+					}
+				});
 			} catch (Exception ex) {
-				HandleException(ex);
+				HandleException(id, ex);
 
-				if (DebugMode)
-					Util.Log("Exception: " + ex);
+				Util.Log("Exception: " + ex);
 				
 				return new HttpResponseMessage { Content = new StringContent(new T().ToJson()) };
 			} finally {

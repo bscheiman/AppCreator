@@ -6,12 +6,18 @@ using System.Diagnostics;
 namespace AppCreator.Helpers {
 	public static class Util {
 		public static ILogger MainLogger { get; set; }
+		public static bool LoggingEnabled { get; set; }
 
 		static Util() {
 			MainLogger = DependencyService.Get<ILogger>();
+
+			LoggingEnabled = true;
 		}
 
 		public static void Log(string str) {
+			if (!LoggingEnabled)
+				return;
+			
 			if (MainLogger != null)
 				MainLogger.Log(str);
 			else

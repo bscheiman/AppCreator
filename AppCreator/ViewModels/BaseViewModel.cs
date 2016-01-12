@@ -2,13 +2,11 @@
 using System;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
-using AppCreator.Custom;
 using PropertyChanged;
 using Xamarin.Forms;
-using Connectivity.Plugin;
 using System.Collections.Generic;
-using Connectivity.Plugin.Abstractions;
 using System.Windows.Input;
+using Plugin.Connectivity.Abstractions;
 
 #endregion
 
@@ -23,11 +21,21 @@ namespace AppCreator.ViewModels {
         public string Title { get; set; }
         public bool Updated { get; set; }
 
+		protected IDictionary<string, object> Properties { 
+			get { return Application.Current.Properties; } 
+		}
+
 		public BaseViewModel() : this(true) {
 		}
 
 		public BaseViewModel(bool updateOnAppear) {
 			CallUpdateOnAppear = updateOnAppear;
+		}
+
+		public virtual void OnAppearing() {
+		}
+
+		public virtual void OnDisappearing() {
 		}
 
         protected Task Alert(string title = "App", string message = "", string okButton = "Ok") {
@@ -74,14 +82,22 @@ namespace AppCreator.ViewModels {
 			});
         }
 
-        public virtual async Task Update() {
+		public virtual async Task Update(bool isRefresh = false) {
             await Task.Run(() => { });
         }
 
 		public ICommand Refresh {
 			get {
-				return new Command(async s => await Update());
+				return new Command(async s => {
+					IsBusy = true;
+					await Update(true);
+					IsBusy = false;
+				});
 			}
+		}
+
+		protected async Task SavePropertiesAsync() {
+			await Application.Current.SavePropertiesAsync();
 		}
 
 		protected bool IsConnected => Instances.Connectivity.IsConnected;

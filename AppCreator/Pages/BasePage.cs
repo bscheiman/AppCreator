@@ -42,16 +42,24 @@ namespace AppCreator.Pages {
 
         protected override async void OnAppearing() {
             base.OnAppearing();
+			BackingModel.OnAppearing();
 
             if (BackingModel.Updated && !BackingModel.CallUpdateOnAppear)
                 return;
 
-            await BackingModel.Update();
+			BackingModel.IsBusy = true;
+			await BackingModel.Update();
+			BackingModel.IsBusy = false;
             BackingModel.Updated = true;
         }
 
         protected void ResetPadding() {
             Padding = new Thickness(0, 0, 0, 0);
         }
+
+		protected override void OnDisappearing() {
+			base.OnDisappearing();
+			BackingModel.OnDisappearing();
+		}
     }
 }
