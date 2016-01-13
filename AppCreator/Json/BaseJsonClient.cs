@@ -89,8 +89,10 @@ namespace AppCreator.Json {
 			return sb.ToString();
 		}
 
-		protected async Task<HttpResponseMessage> Send<T>(HttpMethod method, FormattedUri uri, HttpContent content = null) where T : new() {
+		protected async Task<HttpResponseMessage> Send<T>(HttpMethod method, FormattedUri uri, HttpContent content = null, TimeSpan cacheFor = default(TimeSpan)) where T : new() {
 			var id = GenerateId();
+
+			cacheFor = cacheFor == default(TimeSpan) ? TimeSpan.FromMilliseconds(1) : cacheFor;
 
 			try {
 				PreExecution();
@@ -98,7 +100,7 @@ namespace AppCreator.Json {
 				if (!CanRun()) {
 					Util.Log("Can't run...");
 
-					throw new NoConnectionException();
+					throw new CantExecuteException();
 				}
 
 				var policy = GetPolicy();
@@ -192,16 +194,16 @@ namespace AppCreator.Json {
 			return Put<T>(new FormattedUri(uri, urlParameters), postedObject);
 		}
 
-		protected Task<T> Get<T>(string uri, object parameters) where T : new() {
-			return Get<T>(new FormattedUri(uri, parameters));
+		protected Task<T> Get<T>(string uri, object parameters, TimeSpan cacheFor = default(TimeSpan)) where T : new() {
+			return Get<T>(new FormattedUri(uri, parameters), cacheFor);
 		}
 
-		protected Task<T> Get<T>(string uri, Dictionary<string, string> keyValues) where T : new() {
+		protected Task<T> Get<T>(string uri, Dictionary<string, string> keyValues, TimeSpan cacheFor = default(TimeSpan)) where T : new() {
 			return Get<T>(new FormattedUri(uri, keyValues));
 		}
 
-		protected async Task<T> Get<T>(FormattedUri uri) where T : new() {
-			var res = await Send<T>(HttpMethod.Get, uri);
+		protected async Task<T> Get<T>(FormattedUri uri, TimeSpan cacheFor = default(TimeSpan)) where T : new() {
+			var res = await Send<T>(HttpMethod.Get, uri, null, cacheFor);
 
 			return await ReadJson<T>(res);
 		}

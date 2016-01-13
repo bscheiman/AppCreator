@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace AppCreator.Exceptions {
-	public class NoConnectionException : Exception {
+	public class CantExecuteException : Exception {
 	}
 }
 
