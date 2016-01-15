@@ -13,11 +13,23 @@ using AppCreator.Helpers;
 using System.Diagnostics;
 using Polly;
 using AppCreator.Exceptions;
+using Splat;
+using Fusillade;
 
 namespace AppCreator.Json {
+	public enum RequestType {
+		Speculative,
+		Background,
+		User
+	}
+
 	public abstract class BaseJsonClient {
 		internal static Random Random = new Random();
 		internal bool ReturnNull { get; set; }
+
+		static BaseJsonClient() {
+			Locator.CurrentMutable.RegisterConstant(new NativeMessageHandler(), typeof(HttpMessageHandler));
+		}
 
 		protected BaseJsonClient(string baseAddress, bool returnNull) {
 			FormattedUri.BaseAddress = new Uri(baseAddress);
@@ -44,6 +56,10 @@ namespace AppCreator.Json {
 
 				return ReturnNull ? default(T) : new T();
 			}
+		}
+
+		public void ResetCache() {
+			NetCache.Speculative.ResetLimit(1048576 * 5 /*MB*/);
 		}
 
 		protected virtual void HandleException(string id, Exception ex) {
@@ -74,10 +90,10 @@ namespace AppCreator.Json {
 			return (await func());
 		}
 
-		protected HttpMessageHandler GetHandler(HttpMethod method) {
-			return ModifyHandler(new NativeMessageHandler {
-				AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
-			}, method);
+		protected HttpMessageHandler GetHandler(HttpMethod method, RequestType requestType) {
+			HttpMessageHandler handler = requestType == RequestType.User ? NetCache.UserInitiated : requestType == RequestType.Background ? NetCache.Background : NetCache.Speculative;
+
+			return ModifyHandler(handler, method);
 		}
 
 		private string GenerateId() {
@@ -89,10 +105,8 @@ namespace AppCreator.Json {
 			return sb.ToString();
 		}
 
-		protected async Task<HttpResponseMessage> Send<T>(HttpMethod method, FormattedUri uri, HttpContent content = null, TimeSpan cacheFor = default(TimeSpan)) where T : new() {
+		protected async Task<HttpResponseMessage> Send<T>(HttpMethod method, FormattedUri uri, HttpContent content = null, RequestType requestType = RequestType.User) where T : new() {
 			var id = GenerateId();
-
-			cacheFor = cacheFor == default(TimeSpan) ? TimeSpan.FromMilliseconds(1) : cacheFor;
 
 			try {
 				PreExecution();
@@ -106,7 +120,7 @@ namespace AppCreator.Json {
 				var policy = GetPolicy();
 
 				return await policy.ExecuteAsync(async () => {
-					using (var httpClient = ModifyClient(new HttpClient(GetHandler(method)), method)) {
+					using (var httpClient = ModifyClient(new HttpClient(GetHandler(method, requestType)), method)) {
 						var finalUri = uri.ToString();
 						var sw = Stopwatch.StartNew();
 
@@ -194,16 +208,16 @@ namespace AppCreator.Json {
 			return Put<T>(new FormattedUri(uri, urlParameters), postedObject);
 		}
 
-		protected Task<T> Get<T>(string uri, object parameters, TimeSpan cacheFor = default(TimeSpan)) where T : new() {
-			return Get<T>(new FormattedUri(uri, parameters), cacheFor);
+		protected Task<T> Get<T>(string uri, object parameters, RequestType requestType = RequestType.User) where T : new() {
+			return Get<T>(new FormattedUri(uri, parameters), requestType);
 		}
 
-		protected Task<T> Get<T>(string uri, Dictionary<string, string> keyValues, TimeSpan cacheFor = default(TimeSpan)) where T : new() {
-			return Get<T>(new FormattedUri(uri, keyValues));
+		protected Task<T> Get<T>(string uri, Dictionary<string, string> keyValues, RequestType requestType = RequestType.User) where T : new() {
+			return Get<T>(new FormattedUri(uri, keyValues), requestType);
 		}
 
-		protected async Task<T> Get<T>(FormattedUri uri, TimeSpan cacheFor = default(TimeSpan)) where T : new() {
-			var res = await Send<T>(HttpMethod.Get, uri, null, cacheFor);
+		protected async Task<T> Get<T>(FormattedUri uri, RequestType requestType = RequestType.User) where T : new() {
+			var res = await Send<T>(HttpMethod.Get, uri, null, requestType);
 
 			return await ReadJson<T>(res);
 		}

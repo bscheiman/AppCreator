@@ -83,8 +83,10 @@ namespace AppCreator.ViewModels {
         }
 
 		public virtual async Task Update(bool isRefresh = false) {
-            await Task.Run(() => { });
-        }
+		}
+
+		public virtual async Task Setup() {
+		}
 
 		public ICommand Refresh {
 			get {
