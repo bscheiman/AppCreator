@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/bscheiman/AppCreator.png?label=ready&title=Ready)](https://waffle.io/bscheiman/AppCreator)
 # AppCreator
 
 This library contains several Xamarin University-backed best practices & time savers:
