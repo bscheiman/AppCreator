@@ -195,6 +195,18 @@ namespace AppCreator.Json {
 			return Patch<T>(new FormattedUri(uri, urlParameters), postedObject);
 		}
 
+        protected Task<T> PatchFormDataContent<T>(string uri, object urlParameters, Dictionary<string, string> keyValues = null) where T : new() {
+            return PatchFormDataContent<T>(new FormattedUri(uri, urlParameters), keyValues);
+        }
+
+        protected async Task<T> PatchFormDataContent<T>(FormattedUri uri, Dictionary<string, string> keyValues = null) where T : new() {
+			keyValues = keyValues ?? new Dictionary<string, string>();
+
+			var res = await Send<T>(new HttpMethod("PATCH"), uri, new FormUrlEncodedContent(keyValues.Select(x => new KeyValuePair<string, string>(x.Key, x.Value))));
+
+			return await ReadJson<T>(res);
+		}
+
 		protected async Task<T> Put<T>(FormattedUri uri, object postedObject = null) where T : new() {
 			postedObject = postedObject ?? new object();
 
