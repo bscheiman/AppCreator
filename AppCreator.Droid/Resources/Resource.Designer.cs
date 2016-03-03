@@ -184,42 +184,6 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0100d1
 			public static int activityChooserViewStyle = 2130772177;
 			
-			// aapt resource value: 0x7f01011b
-			public static int ahBarColor = 2130772251;
-			
-			// aapt resource value: 0x7f010123
-			public static int ahBarLength = 2130772259;
-			
-			// aapt resource value: 0x7f010122
-			public static int ahBarWidth = 2130772258;
-			
-			// aapt resource value: 0x7f010120
-			public static int ahCircleColor = 2130772256;
-			
-			// aapt resource value: 0x7f01011f
-			public static int ahDelayMillis = 2130772255;
-			
-			// aapt resource value: 0x7f010121
-			public static int ahRadius = 2130772257;
-			
-			// aapt resource value: 0x7f01011c
-			public static int ahRimColor = 2130772252;
-			
-			// aapt resource value: 0x7f01011d
-			public static int ahRimWidth = 2130772253;
-			
-			// aapt resource value: 0x7f01011e
-			public static int ahSpinSpeed = 2130772254;
-			
-			// aapt resource value: 0x7f010118
-			public static int ahText = 2130772248;
-			
-			// aapt resource value: 0x7f010119
-			public static int ahTextColor = 2130772249;
-			
-			// aapt resource value: 0x7f01011a
-			public static int ahTextSize = 2130772250;
-			
 			// aapt resource value: 0x7f0100f3
 			public static int alertDialogButtonGroupStyle = 2130772211;
 			
@@ -1803,97 +1767,85 @@ namespace AppCreator.Droid
 			public static int ic_cast_on_light = 2130837575;
 			
 			// aapt resource value: 0x7f020048
-			public static int ic_errorstatus = 2130837576;
+			public static int ic_media_pause = 2130837576;
 			
 			// aapt resource value: 0x7f020049
-			public static int ic_media_pause = 2130837577;
+			public static int ic_media_play = 2130837577;
 			
 			// aapt resource value: 0x7f02004a
-			public static int ic_media_play = 2130837578;
+			public static int ic_media_route_disabled_mono_dark = 2130837578;
 			
 			// aapt resource value: 0x7f02004b
-			public static int ic_media_route_disabled_mono_dark = 2130837579;
+			public static int ic_media_route_off_mono_dark = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public static int ic_media_route_off_mono_dark = 2130837580;
+			public static int ic_media_route_on_0_mono_dark = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public static int ic_media_route_on_0_mono_dark = 2130837581;
+			public static int ic_media_route_on_1_mono_dark = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public static int ic_media_route_on_1_mono_dark = 2130837582;
+			public static int ic_media_route_on_2_mono_dark = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public static int ic_media_route_on_2_mono_dark = 2130837583;
+			public static int ic_media_route_on_mono_dark = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public static int ic_media_route_on_mono_dark = 2130837584;
+			public static int ic_pause_dark = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public static int ic_pause_dark = 2130837585;
+			public static int ic_pause_light = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public static int ic_pause_light = 2130837586;
+			public static int ic_play_dark = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public static int ic_play_dark = 2130837587;
+			public static int ic_play_light = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public static int ic_play_light = 2130837588;
+			public static int ic_setting_dark = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public static int ic_setting_dark = 2130837589;
+			public static int ic_setting_light = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public static int ic_setting_light = 2130837590;
+			public static int mr_ic_cast_dark = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public static int ic_successstatus = 2130837591;
+			public static int mr_ic_cast_light = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public static int mr_ic_cast_dark = 2130837592;
+			public static int mr_ic_media_route_connecting_mono_dark = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public static int mr_ic_cast_light = 2130837593;
+			public static int mr_ic_media_route_connecting_mono_light = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public static int mr_ic_media_route_connecting_mono_dark = 2130837594;
+			public static int mr_ic_media_route_mono_dark = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public static int mr_ic_media_route_connecting_mono_light = 2130837595;
+			public static int mr_ic_media_route_mono_light = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public static int mr_ic_media_route_mono_dark = 2130837596;
+			public static int mr_ic_pause_dark = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public static int mr_ic_media_route_mono_light = 2130837597;
+			public static int mr_ic_pause_light = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public static int mr_ic_pause_dark = 2130837598;
+			public static int mr_ic_play_dark = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public static int mr_ic_pause_light = 2130837599;
+			public static int mr_ic_play_light = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public static int mr_ic_play_dark = 2130837600;
+			public static int mr_ic_settings_dark = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public static int mr_ic_play_light = 2130837601;
+			public static int mr_ic_settings_light = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public static int mr_ic_settings_dark = 2130837602;
-			
-			// aapt resource value: 0x7f020063
-			public static int mr_ic_settings_light = 2130837603;
-			
-			// aapt resource value: 0x7f020066
-			public static int notification_template_icon_bg = 2130837606;
-			
-			// aapt resource value: 0x7f020064
-			public static int roundedbg = 2130837604;
-			
-			// aapt resource value: 0x7f020065
-			public static int roundedbgdark = 2130837605;
+			public static int notification_template_icon_bg = 2130837602;
 			
 			static Drawable()
 			{
@@ -1908,8 +1860,8 @@ namespace AppCreator.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a0078
-			public static int action0 = 2131361912;
+			// aapt resource value: 0x7f0a0074
+			public static int action0 = 2131361908;
 			
 			// aapt resource value: 0x7f0a0055
 			public static int action_bar = 2131361877;
@@ -1935,8 +1887,8 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a0056
 			public static int action_context_bar = 2131361878;
 			
-			// aapt resource value: 0x7f0a007c
-			public static int action_divider = 2131361916;
+			// aapt resource value: 0x7f0a0078
+			public static int action_divider = 2131361912;
 			
 			// aapt resource value: 0x7f0a0003
 			public static int action_menu_divider = 2131361795;
@@ -1962,8 +1914,8 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a0032
 			public static int always = 2131361842;
 			
-			// aapt resource value: 0x7f0a0070
-			public static int art = 2131361904;
+			// aapt resource value: 0x7f0a006c
+			public static int art = 2131361900;
 			
 			// aapt resource value: 0x7f0a0030
 			public static int beginning = 2131361840;
@@ -1974,11 +1926,11 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a004b
 			public static int buttonPanel = 2131361867;
 			
-			// aapt resource value: 0x7f0a0075
-			public static int buttons = 2131361909;
+			// aapt resource value: 0x7f0a0071
+			public static int buttons = 2131361905;
 			
-			// aapt resource value: 0x7f0a0079
-			public static int cancel_action = 2131361913;
+			// aapt resource value: 0x7f0a0075
+			public static int cancel_action = 2131361909;
 			
 			// aapt resource value: 0x7f0a0012
 			public static int center = 2131361810;
@@ -1992,8 +1944,8 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a004d
 			public static int checkbox = 2131361869;
 			
-			// aapt resource value: 0x7f0a007f
-			public static int chronometer = 2131361919;
+			// aapt resource value: 0x7f0a007b
+			public static int chronometer = 2131361915;
 			
 			// aapt resource value: 0x7f0a001b
 			public static int clip_horizontal = 2131361819;
@@ -2019,14 +1971,14 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a003e
 			public static int default_activity_button = 2131361854;
 			
-			// aapt resource value: 0x7f0a006f
-			public static int default_control_frame = 2131361903;
+			// aapt resource value: 0x7f0a006b
+			public static int default_control_frame = 2131361899;
 			
 			// aapt resource value: 0x7f0a0025
 			public static int disableHome = 2131361829;
 			
-			// aapt resource value: 0x7f0a0076
-			public static int disconnect = 2131361910;
+			// aapt resource value: 0x7f0a0072
+			public static int disconnect = 2131361906;
 			
 			// aapt resource value: 0x7f0a0057
 			public static int edit_query = 2131361879;
@@ -2034,8 +1986,8 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a0015
 			public static int end = 2131361813;
 			
-			// aapt resource value: 0x7f0a0084
-			public static int end_padder = 2131361924;
+			// aapt resource value: 0x7f0a0080
+			public static int end_padder = 2131361920;
 			
 			// aapt resource value: 0x7f0a000a
 			public static int enterAlways = 2131361802;
@@ -2079,17 +2031,17 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a003d
 			public static int image = 2131361853;
 			
-			// aapt resource value: 0x7f0a0083
-			public static int info = 2131361923;
+			// aapt resource value: 0x7f0a007f
+			public static int info = 2131361919;
 			
 			// aapt resource value: 0x7f0a0017
 			public static int left = 2131361815;
 			
-			// aapt resource value: 0x7f0a007d
-			public static int line1 = 2131361917;
+			// aapt resource value: 0x7f0a0079
+			public static int line1 = 2131361913;
 			
-			// aapt resource value: 0x7f0a0081
-			public static int line3 = 2131361921;
+			// aapt resource value: 0x7f0a007d
+			public static int line3 = 2131361917;
 			
 			// aapt resource value: 0x7f0a0023
 			public static int listMode = 2131361827;
@@ -2097,29 +2049,20 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a003f
 			public static int list_item = 2131361855;
 			
-			// aapt resource value: 0x7f0a0068
-			public static int loadingImage = 2131361896;
-			
-			// aapt resource value: 0x7f0a0066
-			public static int loadingProgressBar = 2131361894;
-			
-			// aapt resource value: 0x7f0a0069
-			public static int loadingProgressWheel = 2131361897;
-			
-			// aapt resource value: 0x7f0a007b
-			public static int media_actions = 2131361915;
-			
-			// aapt resource value: 0x7f0a006e
-			public static int media_route_control_frame = 2131361902;
+			// aapt resource value: 0x7f0a0077
+			public static int media_actions = 2131361911;
 			
 			// aapt resource value: 0x7f0a006a
-			public static int media_route_list = 2131361898;
+			public static int media_route_control_frame = 2131361898;
 			
-			// aapt resource value: 0x7f0a0073
-			public static int media_route_volume_layout = 2131361907;
+			// aapt resource value: 0x7f0a0066
+			public static int media_route_list = 2131361894;
 			
-			// aapt resource value: 0x7f0a0074
-			public static int media_route_volume_slider = 2131361908;
+			// aapt resource value: 0x7f0a006f
+			public static int media_route_volume_layout = 2131361903;
+			
+			// aapt resource value: 0x7f0a0070
+			public static int media_route_volume_slider = 2131361904;
 			
 			// aapt resource value: 0x7f0a0031
 			public static int middle = 2131361841;
@@ -2148,8 +2091,8 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a0010
 			public static int pin = 2131361808;
 			
-			// aapt resource value: 0x7f0a0071
-			public static int play_pause = 2131361905;
+			// aapt resource value: 0x7f0a006d
+			public static int play_pause = 2131361901;
 			
 			// aapt resource value: 0x7f0a0006
 			public static int progress_circular = 2131361798;
@@ -2163,8 +2106,8 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a0018
 			public static int right = 2131361816;
 			
-			// aapt resource value: 0x7f0a006c
-			public static int route_name = 2131361900;
+			// aapt resource value: 0x7f0a0068
+			public static int route_name = 2131361896;
 			
 			// aapt resource value: 0x7f0a002c
 			public static int screen = 2131361836;
@@ -2211,8 +2154,8 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a0063
 			public static int select_dialog_listview = 2131361891;
 			
-			// aapt resource value: 0x7f0a006d
-			public static int settings = 2131361901;
+			// aapt resource value: 0x7f0a0069
+			public static int settings = 2131361897;
 			
 			// aapt resource value: 0x7f0a004e
 			public static int shortcut = 2131361870;
@@ -2247,41 +2190,38 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f0a0019
 			public static int start = 2131361817;
 			
-			// aapt resource value: 0x7f0a007a
-			public static int status_bar_latest_event_content = 2131361914;
+			// aapt resource value: 0x7f0a0076
+			public static int status_bar_latest_event_content = 2131361910;
 			
-			// aapt resource value: 0x7f0a0077
-			public static int stop = 2131361911;
+			// aapt resource value: 0x7f0a0073
+			public static int stop = 2131361907;
 			
 			// aapt resource value: 0x7f0a0060
 			public static int submit_area = 2131361888;
 			
-			// aapt resource value: 0x7f0a0072
-			public static int subtitle = 2131361906;
+			// aapt resource value: 0x7f0a006e
+			public static int subtitle = 2131361902;
 			
 			// aapt resource value: 0x7f0a0024
 			public static int tabMode = 2131361828;
 			
-			// aapt resource value: 0x7f0a0082
-			public static int text = 2131361922;
+			// aapt resource value: 0x7f0a007e
+			public static int text = 2131361918;
 			
-			// aapt resource value: 0x7f0a0080
-			public static int text2 = 2131361920;
+			// aapt resource value: 0x7f0a007c
+			public static int text2 = 2131361916;
 			
 			// aapt resource value: 0x7f0a0048
 			public static int textSpacerNoButtons = 2131361864;
 			
-			// aapt resource value: 0x7f0a0067
-			public static int textViewStatus = 2131361895;
-			
-			// aapt resource value: 0x7f0a007e
-			public static int time = 2131361918;
+			// aapt resource value: 0x7f0a007a
+			public static int time = 2131361914;
 			
 			// aapt resource value: 0x7f0a0041
 			public static int title = 2131361857;
 			
-			// aapt resource value: 0x7f0a006b
-			public static int title_bar = 2131361899;
+			// aapt resource value: 0x7f0a0067
+			public static int title_bar = 2131361895;
 			
 			// aapt resource value: 0x7f0a0044
 			public static int title_template = 2131361860;
@@ -2451,58 +2391,49 @@ namespace AppCreator.Droid
 			public static int design_navigation_menu = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public static int loading = 2130903073;
+			public static int mr_media_route_chooser_dialog = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public static int loadingimage = 2130903074;
+			public static int mr_media_route_controller_material_dialog_b = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public static int loadingprogress = 2130903075;
+			public static int mr_media_route_list_item = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public static int mr_media_route_chooser_dialog = 2130903076;
+			public static int notification_media_action = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public static int mr_media_route_controller_material_dialog_b = 2130903077;
+			public static int notification_media_cancel_action = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public static int mr_media_route_list_item = 2130903078;
+			public static int notification_template_big_media = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public static int notification_media_action = 2130903079;
+			public static int notification_template_big_media_narrow = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public static int notification_media_cancel_action = 2130903080;
+			public static int notification_template_lines = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public static int notification_template_big_media = 2130903081;
+			public static int notification_template_media = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public static int notification_template_big_media_narrow = 2130903082;
+			public static int notification_template_part_chronometer = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public static int notification_template_lines = 2130903083;
+			public static int notification_template_part_time = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public static int notification_template_media = 2130903084;
+			public static int select_dialog_item_material = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public static int notification_template_part_chronometer = 2130903085;
+			public static int select_dialog_multichoice_material = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public static int notification_template_part_time = 2130903086;
+			public static int select_dialog_singlechoice_material = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public static int select_dialog_item_material = 2130903087;
-			
-			// aapt resource value: 0x7f030030
-			public static int select_dialog_multichoice_material = 2130903088;
-			
-			// aapt resource value: 0x7f030031
-			public static int select_dialog_singlechoice_material = 2130903089;
-			
-			// aapt resource value: 0x7f030032
-			public static int support_simple_spinner_dropdown_item = 2130903090;
+			public static int support_simple_spinner_dropdown_item = 2130903087;
 			
 			static Layout()
 			{
@@ -2517,11 +2448,11 @@ namespace AppCreator.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050020
-			public static int ApplicationName = 2131034144;
-			
 			// aapt resource value: 0x7f05001f
-			public static int Hello = 2131034143;
+			public static int ApplicationName = 2131034143;
+			
+			// aapt resource value: 0x7f05001e
+			public static int Hello = 2131034142;
 			
 			// aapt resource value: 0x7f05000c
 			public static int abc_action_bar_home_description = 2131034124;
@@ -2577,8 +2508,8 @@ namespace AppCreator.Droid
 			// aapt resource value: 0x7f05000b
 			public static int appbar_scrolling_view_behavior = 2131034123;
 			
-			// aapt resource value: 0x7f05001e
-			public static int library_name = 2131034142;
+			// aapt resource value: 0x7f050020
+			public static int library_name = 2131034144;
 			
 			// aapt resource value: 0x7f050000
 			public static int mr_media_route_button_content_description = 2131034112;
@@ -4356,57 +4287,6 @@ namespace AppCreator.Droid
 			
 			// aapt resource value: 0
 			public static int PopupWindowBackgroundState_state_above_anchor = 0;
-			
-			public static int[] ProgressWheel = new int[]
-			{
-					2130772248,
-					2130772249,
-					2130772250,
-					2130772251,
-					2130772252,
-					2130772253,
-					2130772254,
-					2130772255,
-					2130772256,
-					2130772257,
-					2130772258,
-					2130772259};
-			
-			// aapt resource value: 3
-			public static int ProgressWheel_ahBarColor = 3;
-			
-			// aapt resource value: 11
-			public static int ProgressWheel_ahBarLength = 11;
-			
-			// aapt resource value: 10
-			public static int ProgressWheel_ahBarWidth = 10;
-			
-			// aapt resource value: 8
-			public static int ProgressWheel_ahCircleColor = 8;
-			
-			// aapt resource value: 7
-			public static int ProgressWheel_ahDelayMillis = 7;
-			
-			// aapt resource value: 9
-			public static int ProgressWheel_ahRadius = 9;
-			
-			// aapt resource value: 4
-			public static int ProgressWheel_ahRimColor = 4;
-			
-			// aapt resource value: 5
-			public static int ProgressWheel_ahRimWidth = 5;
-			
-			// aapt resource value: 6
-			public static int ProgressWheel_ahSpinSpeed = 6;
-			
-			// aapt resource value: 0
-			public static int ProgressWheel_ahText = 0;
-			
-			// aapt resource value: 1
-			public static int ProgressWheel_ahTextColor = 1;
-			
-			// aapt resource value: 2
-			public static int ProgressWheel_ahTextSize = 2;
 			
 			public static int[] ScrimInsetsFrameLayout = new int[]
 			{

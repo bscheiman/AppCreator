@@ -14,7 +14,6 @@ using System.Diagnostics;
 using Polly;
 using AppCreator.Exceptions;
 using Splat;
-using Fusillade;
 
 namespace AppCreator.Json {
 	public enum RequestType {
@@ -26,6 +25,7 @@ namespace AppCreator.Json {
 	public abstract class BaseJsonClient {
 		internal static Random Random = new Random();
 		internal bool ReturnNull { get; set; }
+		public string LastRequest { get;  set; }
 
 		static BaseJsonClient() {
 			Locator.CurrentMutable.RegisterConstant(new NativeMessageHandler(), typeof(HttpMessageHandler));
@@ -59,7 +59,6 @@ namespace AppCreator.Json {
 		}
 
 		public void ResetCache() {
-			NetCache.Speculative.ResetLimit(1048576 * 5 /*MB*/);
 		}
 
 		protected virtual void HandleException(string id, Exception ex) {
@@ -91,9 +90,7 @@ namespace AppCreator.Json {
 		}
 
 		protected HttpMessageHandler GetHandler(HttpMethod method, RequestType requestType) {
-			HttpMessageHandler handler = requestType == RequestType.User ? NetCache.UserInitiated : requestType == RequestType.Background ? NetCache.Background : NetCache.Speculative;
-
-			return ModifyHandler(handler, method);
+			return ModifyHandler(new NativeMessageHandler(), method);
 		}
 
 		private string GenerateId() {
@@ -136,7 +133,8 @@ namespace AppCreator.Json {
 
 						sw.Stop();
 
-						Util.Log("{0} / {1} / RX / {2}ms: {3}", method.Method.ToUpper(), id, sw.ElapsedMilliseconds.ToString("N0", new CultureInfo("en-US")), await msg.Content.ReadAsStringAsync());
+						LastRequest = await msg.Content.ReadAsStringAsync();
+						Util.Log("{0} / {1} / RX / {2}ms: {3}", method.Method.ToUpper(), id, sw.ElapsedMilliseconds.ToString("N0", new CultureInfo("en-US")), LastRequest);
 
 						return msg;
 					}

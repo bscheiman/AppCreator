@@ -11,19 +11,19 @@
         <tags>boris scheiman bscheiman common xamarin appcreator appcreator.ui forms xamarinforms</tags>
         <dependencies>
             <group>
-                <dependency id="Acr.UserDialogs" version="4.2.1" />
-                <dependency id="Xamarin.Forms" version="2.0.0.6490" />
-                <dependency id="AppCreator" version="$version$" />
+                <dependency id="Acr.UserDialogs" version="[4.2.0]" />
+                <dependency id="Xamarin.Forms" version="[2.0.1.6505]" />
+                <dependency id="AppCreator" version="[$version$]" />
             </group>
             <group targetFramework="MonoAndroid10">
-                <dependency id="Acr.UserDialogs" version="4.2.1" />
-                <dependency id="Xamarin.Forms" version="2.0.0.6490" />
-                <dependency id="AppCreator" version="$version$" />
+                <dependency id="Acr.UserDialogs" version="[4.2.0]" />
+                <dependency id="Xamarin.Forms" version="[2.0.1.6505]" />
+                <dependency id="AppCreator" version="[$version$]" />
             </group>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="Acr.UserDialogs" version="4.2.1" />
-                <dependency id="Xamarin.Forms" version="2.0.0.6490" />
-                <dependency id="AppCreator" version="$version$" />
+                <dependency id="Acr.UserDialogs" version="[4.2.0]" />
+                <dependency id="Xamarin.Forms" version="[2.0.1.6505]" />
+                <dependency id="AppCreator" version="[$version$]" />
             </group>
         </dependencies>
     </metadata>
@@ -34,13 +34,15 @@
       <!-- Xamarin.iOS -->
       <file src="AppCreator.iOS/bin/iPhone/Release/AppCreator*" target="lib/xamarinios10" />
       <file src="AppCreator.iOS/Content/Initializers/Init.cs" target="content/xamarinios10/Initializers" />
-      <!-- <file src="AppCreator.iOS/Content/Implementations/Notes.txt" target="content/xamarinios10/Implementations" />
-      <file src="AppCreator.iOS/Content/Renderers/Notes.txt" target="content/xamarinios10/Renderers" /> -->
+      <file src="AppCreator.iOS/Content/Implementations/Notes.txt" target="content/xamarinios10/Implementations" />
+      <file src="AppCreator.iOS/Content/Renderers/Notes.txt" target="content/xamarinios10/Renderers" />
+      <file src="AppCreator.iOS/Content/Extensions/Notes.txt" target="content/xamarinios10/Extensions" />
 
       <!-- Xamarin.Android -->
       <file src="AppCreator.Droid/bin/Release/AppCreator*" target="lib/MonoAndroid10" />
       <file src="AppCreator.Droid/Content/Initializers/Init.cs" target="content/MonoAndroid10/Initializers" />
-      <!-- <file src="AppCreator.Droid/Content/Implementations/Notes.txt" target="content/MonoAndroid10/Implementations" />
-      <file src="AppCreator.Droid/Content/Renderers/Notes.txt" target="content/MonoAndroid10/Renderers" /> -->
+      <file src="AppCreator.Droid/Content/Implementations/Notes.txt" target="content/MonoAndroid10/Implementations" />
+      <file src="AppCreator.Droid/Content/Renderers/Notes.txt" target="content/MonoAndroid10/Renderers" />
+      <file src="AppCreator.iOS/Content/Extensions/Notes.txt" target="content/MonoAndroid10/Extensions" />
     </files>
 </package>

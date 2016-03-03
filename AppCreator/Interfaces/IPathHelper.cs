@@ -2,5 +2,6 @@
     public interface IPathHelper {
         string GetFullPath(string filename);
         string GetLibraryFullPath(string filename);
+		byte[] ReadFile(string filename);
     }
 }
